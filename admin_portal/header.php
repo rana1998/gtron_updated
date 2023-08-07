@@ -695,6 +695,13 @@ $favIcon1 = '';
 </li>
 
 <li class="">
+    <a href="user_registration_table.php">
+        <span class="pcoded-micon"><i class="feather icon-award"></i></span>
+        <span class="pcoded-mtext">New Registration</span>
+    </a>
+</li>
+
+<li class="">
     <a href="admin_wallet_summary_logs.php">
         <span class="pcoded-micon"><i class="feather icon-award"></i></span>
         <span class="pcoded-mtext">Admin Wallet Summery Logs</span>

@@ -1388,6 +1388,26 @@ class AdminHelper
         }
     }
 
+
+    public static function getNewRegisteredUserDetails($db) {
+        try {
+            // SQL query to retrieve for the current month 
+            $sql = "SELECT * FROM pre_registration  ORDER BY id DESC";
+
+            // Prepare the statement
+            $stmt = $db->prepare($sql);
+            // Execute the query
+            $stmt->execute();
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Close the database connection
+            $db  = null;
+            return $res;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+
     // This function is used to get the total number of users id visited in weekly basis.
     // public static function getWeeklyRegisteredUserCount($db) {
     //     try {
