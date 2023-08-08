@@ -194,7 +194,7 @@ $(document).ready(function() {
                 $('.otpSendErrorMessage').text('');
             } else {
                 $('.otpSendSuccessMessage').text('');
-                $('.otpSendErrorMessage').text(feedback);
+                $('.otpSendErrorMessage').text("Oops something went wrong!");
             }
             $(".sendOtpEmail").prop('disabled', false);
             $(".sendOtpEmail").text('SEND OTP');

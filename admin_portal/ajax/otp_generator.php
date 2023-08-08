@@ -66,32 +66,32 @@ try {
 
             if ($stmt->rowCount() > 0) {
                 // ... Rest of your code with OTP generation and email sending ...
-                // $subject = "OTP for GTRON Withdrawals";
-                // $filename = '../resources/file.txt';
-                // $content = file_get_contents($filename);
-                // $content = str_replace("{{favIcon1}}", $favIcon1, $content);
-				// $content = str_replace("{{code}}", $code, $content);
-                // $email_template = $content;
-                // $mail->isSMTP();
-                // $mail->Host = 'mail.eighty5technologies.com';
-                // $mail->Port = 465;
-                // $mail->SMTPAuth = true;
-                // $mail->Username = 'mailcheck@eighty5technologies.com';
-                // $mail->Password = 'Sb(QUZi5@t}';
-                // $mail->SMTPSecure = 'ssl';
+                $subject = "OTP for GTRON Withdrawals";
+                $filename = '../resources/file.txt';
+                $content = file_get_contents($filename);
+                $content = str_replace("{{favIcon1}}", $favIcon1, $content);
+				$content = str_replace("{{code}}", $code, $content);
+                $email_template = $content;
+                $mail->isSMTP();
+                $mail->Host = 'mail.eighty5technologies.com';
+                $mail->Port = 465;
+                $mail->SMTPAuth = true;
+                $mail->Username = 'mailcheck@eighty5technologies.com';
+                $mail->Password = 'Sb(QUZi5@t}';
+                $mail->SMTPSecure = 'ssl';
 
-                // // Email content
-                // $mail->setFrom('mailcheck@eighty5technologies.com', 'GTRON');
-                // $mail->addAddress($to, $full_name);
-                // $mail->Subject = $subject;
-                // $mail->isHTML(true);
-                // $mail->Body = $email_template;
+                // Email content
+                $mail->setFrom('mailcheck@eighty5technologies.com', 'GTRON');
+                $mail->addAddress($to, $full_name);
+                $mail->Subject = $subject;
+                $mail->isHTML(true);
+                $mail->Body = $email_template;
 
-                // if ($mail->send()) {
+                if ($mail->send()) {
                     echo "Email Sent Successfully";
-                // } else {
-                //     echo "Email Not Sent";
-                // }
+                } else {
+                    echo "Email Not Sent";
+                }
                 
             } else {
                 echo "Failed to update OTP code in the database.";
