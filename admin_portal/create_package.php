@@ -6,13 +6,22 @@ include "header.php";
 		
 		
 		$packageName = strtolower(mysqli_real_escape_string($con,$_POST['packageName']));
-        $noOfDays = mysqli_real_escape_string($con,$_POST['noOfDays']);
-        $percentage = mysqli_real_escape_string($con,$_POST['percentage']);
-        $minAmount = mysqli_real_escape_string($con,$_POST['minAmount']);
-        $maxAmount = mysqli_real_escape_string($con,$_POST['maxAmount']);
-        $returnCapital = mysqli_real_escape_string($con,$_POST['returnCapital']);
+		$packageAmount = mysqli_real_escape_string($con,$_POST['packageAmount']);
 
-        if(empty($packageName) || empty($noOfDays) || empty($percentage) || empty($minAmount) || empty($maxAmount) || empty($returnCapital))
+        // $noOfDays = mysqli_real_escape_string($con,$_POST['noOfDays']);
+        // $percentage = mysqli_real_escape_string($con,$_POST['percentage']);
+        // $minAmount = mysqli_real_escape_string($con,$_POST['minAmount']);
+        // $maxAmount = mysqli_real_escape_string($con,$_POST['maxAmount']);
+        // $returnCapital = mysqli_real_escape_string($con,$_POST['returnCapital']);
+
+        // if(empty($packageName) || empty($noOfDays) || empty($percentage) || empty($minAmount) || empty($maxAmount) || empty($returnCapital))
+        // {
+        //         $_SESSION['errorMsg']='Please fill all data';
+		// 		header("Location: create_package.php");
+		// 		exit();
+        // }
+
+		if(empty($packageName) || empty($packageAmount))
         {
                 $_SESSION['errorMsg']='Please fill all data';
 				header("Location: create_package.php");
@@ -50,8 +59,10 @@ include "header.php";
             move_uploaded_file($ImgTemp, $ImgDestinationFile);
             
            // Insert into bank table
-    		$insert = "INSERT INTO `package`(`package_name`, `no_of_days`, `percentage_per_day`, `min_amount`, `max_amount`,`image`, `capital`) 
-    		VALUES ('$packageName','$noOfDays','$percentage','$minAmount','$maxAmount','$ImgDestinationFile','$returnCapital')";
+    		// $insert = "INSERT INTO `package`(`package_name`, `no_of_days`, `percentage_per_day`, `min_amount`, `max_amount`,`image`, `capital`) 
+    		// VALUES ('$packageName','$noOfDays','$percentage','$minAmount','$maxAmount','$ImgDestinationFile','$returnCapital')";
+			$insert = "INSERT INTO `package`(`package_name`, `pkg_price`, `image`) 
+    		VALUES ('$packageName','$packageAmount','$ImgDestinationFile')";
     		$run_insert = mysqli_query($con, $insert);
     			if(!$run_update && !$run_insert){
     				echo '<h6>'.mysqli_error( $con ).'</h6>';
@@ -152,6 +163,12 @@ include "header.php";
 										</div>
 									</div>
 									<div class="form-group row">
+										<label class="col-sm-3 col-form-label">Package Amount</label>
+										<div class="col-sm-9">
+											<input type="number" class="form-control" name="packageAmount" id="packageAmount"  value="">
+										</div>
+									</div>
+									<!-- <div class="form-group row">
 										<label class="col-sm-3 col-form-label">No of days</label>
 										<div class="col-sm-9">
 											<input type="number" class="form-control" name="noOfDays" id="noOfDays"  value="">
@@ -174,23 +191,22 @@ include "header.php";
 										<div class="col-sm-9">
 											<input type="number" class="form-control" name="maxAmount" id="maxAmount"  value="">
 										</div>
-									</div>
+									</div> -->
 									<div class="form-group row">
 										<label class="col-sm-3 col-form-label">Image (png, jpg, jpeg only)</label>
 										<div class="col-sm-9">
 											<input type="file" class="form-control" name="file" id="file"  value="">
 										</div>
 									</div>
-										<div class="form-group row">
+										<!-- <div class="form-group row">
 										<label class="col-sm-3 col-form-label">Return Capital</label>
 										<div class="col-sm-9">
-											<!--<input type="number" class="form-control" name="returnCapital" id="returnCapital"  value="">-->
 											<select class="form-control" id="returnCapital" name="returnCapital">
 											    <option value="" hidden>Select</option>
 											    <option value="yes">Yes</option>
 											    <option value="no">No</option>
 											</select>
-										</div>
+										</div> -->
 									</div>
 									<div class="form-group row">
 										<div class="col-md-12">

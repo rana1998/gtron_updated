@@ -110,12 +110,9 @@
                                                                         <th>User Name</th>
                                                                         <th>Package</th>
                                                                         <th>Price</th>
-                                                                        <th>Mode</th>
                                                                         <th>Transaction ID</th>
                                                                         <th>Status</th>
-                                                                        <th>Approved By</th>
-                                                                        <th>Reject Reason</th>
-                                                                        <th>Date</th>
+                                                                        <th>Datetime</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -144,8 +141,8 @@
                                                                 <td><?php echo $full_name;  ?></td>
                                                                 <td><?php echo $data['user_name'];  ?></td>
                                                                 <td><?php echo $data['pkg_name'];  ?></td>
-                                                                <td><?php echo 'PKR ' . $data['pkg_price'];  ?></td>
-                                                                <td><?php echo $data['mode'];  ?></td>
+                                                                <td><?php echo 'USDT ' . $data['pkg_price'];  ?></td>
+                                                                <!-- <td><?php echo $data['mode'];  ?></td> -->
                                                                 <td><?php echo $data['trans_id'];  ?></td>
                                                                 <td>
                                                                 <?php if ($pkgstatus == 'Approved') {
@@ -164,19 +161,10 @@
   	                                                                  }
   	                                                                ?></td>
   	                                                              
-                                                                 <td><?php echo $data['approved_by'];  ?></td>
+                                                                
                                                                  
                                                                  
-                                                                 <td><?php if($data['reason'] == ''){
-                                                                 echo "N/A";
-                                                                 
-                                                                 }elseif($data['reason'] != ''){
-                                                                 echo $data['reason'];
-                                                                 }
-                                                                 ?></td>
-                                                                 
-                                                                 
-                                                                <td><?php echo date('Y-m-d',strtotime($data['date']) );  ?></td>
+                                                                <td><?php echo date('Y-m-d:h-m:s',strtotime($data['date']) );  ?></td>
                                                             </tr>
                                                             <?php endwhile; ?>                                    
                                                         </tbody>
@@ -187,12 +175,9 @@
                                                                         <th>User Name</th>
                                                                         <th>Package</th>
                                                                         <th>Price</th>
-                                                                        <th>Mode</th>
                                                                         <th>Transaction ID</th>
                                                                         <th>Status</th>
-                                                                        <th>Approved By</th>
-                                                                        <th>Reject Reason</th>
-                                                                        <th>Date</th>
+                                                                        <th>Datetime</th>
                                                                     </tr>
                                                                 </tfoot>
                                                             </table>
