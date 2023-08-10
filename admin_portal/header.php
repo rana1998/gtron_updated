@@ -785,6 +785,15 @@ $favIcon1 = '';
 </li>
 
 <li class="">
+    <a href="user_dividend_bonus_history.php">
+        <span class="pcoded-micon"><i class="feather icon-award"></i></span>
+        <span class="pcoded-mtext"> Dividend Bonus history</span>
+    </a>
+</li>
+
+
+
+<li class="">
 <a href="logout.php">
 <span class="pcoded-micon"><i class="feather icon-log-out"></i></span>
 <span class="pcoded-mtext">Logout</span>

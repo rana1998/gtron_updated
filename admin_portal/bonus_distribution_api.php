@@ -150,7 +150,7 @@ if ($result) {
 					$updateUser = "UPDATE `user_registration` SET `threex_amount`='$userFinalll', `gtron_wallet` = '$newGtronWallet', `current_bonus_status` = 'fourex' WHERE id='$userid'";
 					$by = mysqli_query($conn2, $updateUser);
 					$date = date('Y-m-d');
-					$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`) VALUES ('', '$user_name', '$shareHeGot', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$shareHeGot', 'level_bonus')";
+					$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`, `current_bonus_status`) VALUES ('', '$user_name', '$shareHeGot', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$shareHeGot', 'level_bonus', 'fourex')";
 					mysqli_query($conn2, $updateInsert);
 					$finalAdminwalletAmount = $walletAmount + $remaining_amount;
 					$walletAmount = $finalAdminwalletAmount;
@@ -165,7 +165,7 @@ if ($result) {
 					$by = mysqli_query($conn2, $updateUser);
 					//to do wallet summry add gtron_wallet but insert user_bonus
 					$date = date('Y-m-d');
-					$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`) VALUES ('', '$user_name', '$user_bonus', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$user_bonus', 'level_bonus')";
+					$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`,`current_bonus_status`) VALUES ('', '$user_name', '$user_bonus', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$user_bonus', 'level_bonus','fourex')";
 					mysqli_query($conn2, $updateInsert);
 				}
 		} 
@@ -215,7 +215,7 @@ if ($result) {
 									$updateUser = "UPDATE `user_registration` SET `threex_amount`='$userFinalll', `gtron_wallet` = '$newGtronWallet',`current_bonus_status` = 'threeex' WHERE id='$userid'";
 									$by = mysqli_query($conn2, $updateUser);
 									$date = date('Y-m-d');
-									$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`) VALUES ('', '$user_name', '$shareHeGot', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$shareHeGot', 'level_bonus')";
+									$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`,`current_bonus_status`) VALUES ('', '$user_name', '$shareHeGot', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$shareHeGot', 'level_bonus','threeex')";
 									mysqli_query($conn2, $updateInsert);
 									$finalAdminwalletAmount = $walletAmount + $remaining_amount;
 									$walletAmount = $finalAdminwalletAmount;
@@ -231,7 +231,7 @@ if ($result) {
 									$by = mysqli_query($conn2, $updateUser);
 									//to do wallet summry add gtron_wallet but insert user_bonus
 									$date = date('Y-m-d');
-									$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`,`credit_type`) VALUES ('', '$user_name', '$user_bonus', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$user_bonus', 'level_bonus')";
+									$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`,`credit_type`,`current_bonus_status`) VALUES ('', '$user_name', '$user_bonus', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$user_bonus', 'level_bonus','threeex')";
 									mysqli_query($conn2, $updateInsert);
 									// $total_share = $total_share - $user_share;
 								}
@@ -247,7 +247,7 @@ if ($result) {
 									$updateUser = "UPDATE `user_registration` SET `threex_amount`='$userFinalll' , `gtron_wallet` = '$newGtronWallet', `current_bonus_status` = 'twoex' WHERE id='$userid'";
 									$by = mysqli_query($conn2, $updateUser);
 									$date = date('Y-m-d');
-									$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`) VALUES ('', '$user_name', '$shareHeGot', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$shareHeGot', 'level_bonus')";
+									$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`,`current_bonus_status`) VALUES ('', '$user_name', '$shareHeGot', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$shareHeGot', 'level_bonus','twoex')";
 									mysqli_query($conn2, $updateInsert);
 									$finalAdminwalletAmount = $walletAmount + $remaining_amount;
 
@@ -266,7 +266,7 @@ if ($result) {
 
 									//to do wallet summry add gtron_wallet but insert user_bonus
 									$date = date('Y-m-d');
-									$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`) VALUES ('', '$user_name', '$user_bonus', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$user_bonus', 'level_bonus')";
+									$updateInsert = "INSERT INTO `wallet_summary`(`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`,`current_bonus_status`) VALUES ('', '$user_name', '$user_bonus', 'Pool Bonus', 'Cash Wallet', 'Credit', '$date', '$user_bonus', 'level_bonus','twoex')";
 									mysqli_query($conn2, $updateInsert);
 									// $total_share = $total_share - $user_share;
 								}
