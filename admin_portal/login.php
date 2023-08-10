@@ -42,6 +42,7 @@ if (isset($_POST['submit'])) {
                 
                     session_regenerate_id();
                     $_SESSION['admin_name'] = $row['user_name'];
+                    $_SESSION['admin_email'] = $row['email'];
                     header("Location: index.php");
                     exit();
                 }
