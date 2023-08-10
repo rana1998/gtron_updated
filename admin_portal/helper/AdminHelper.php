@@ -1408,6 +1408,97 @@ class AdminHelper
         }
     }
 
+    // This function is used to get the user's  withdrawal history on a daily basis.
+    public static function getDailyUserXAmountWalletHistory($db) {
+		try {
+            // Get the current timestamp
+            $sql = "SELECT * FROM wallet_summary  WHERE date >= NOW() - INTERVAL 1 DAY AND date <= NOW()";
+            // Prepare the statement
+            $stmt = $db->prepare($sql);
+            // Execute the query
+            $stmt->execute();
+            // Fetch the result
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);            
+            // Close the database connection
+            $db  = null;
+            return $result;
+		}
+		catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+		}	
+    }
+
+    public static function getWeeklyUserXAmountWalletHistory($db) {
+        try {
+            // SQL query to retrieve data from the last 7 days with a weekly interval
+            $sql = "SELECT * FROM wallet_summary WHERE date >= CURDATE() - INTERVAL 7 DAY ORDER BY date DESC";
+            // Prepare the statement
+            $stmt = $db->prepare($sql);
+            // Execute the query
+            $stmt->execute();
+            // Fetch the results as associative array
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // Close the database connection
+            $db  = null;
+            return $results;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+
+    public static function getMonthlyUserXAmountWalletHistory($db) {
+        try {
+            // Get the current month and year
+            $currentMonth = date('m');
+            $currentYear = date('Y');
+
+            // SQL query to retrieve for the current month 
+            $sql = "SELECT * FROM wallet_summary WHERE MONTH(date) = :monthNumber AND YEAR(date) = :yearNumber";
+
+            // Prepare the statement
+            $stmt = $db->prepare($sql);
+
+            // Bind the values to the placeholders
+            $stmt->bindParam(':monthNumber', $currentMonth);
+            $stmt->bindParam(':yearNumber', $currentYear);
+
+            // Execute the query
+            $stmt->execute();
+            $userIDs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Close the database connection
+            $db  = null;
+            return $userIDs;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+
+    public static function getIntervalUserXAmountWalletHistory($db, $start_date, $end_date) {
+        try {
+            // SQL query to retrieve for the current month 
+            $start_datetime = $start_date . " 00:00:00";
+            $end_datetime = $end_date . " 23:59:59";
+
+            $sql = "SELECT * FROM wallet_summary WHERE date BETWEEN :start_date AND :end_date";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':start_date', $start_datetime, PDO::PARAM_STR);
+            $stmt->bindParam(':end_date', $end_datetime, PDO::PARAM_STR);
+            $stmt->execute();
+
+            // Execute the query
+            $stmt->execute();
+            $response = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // Close the database connection
+            $db  = null;
+            return $response;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
+
     // This function is used to get the total number of users id visited in weekly basis.
     // public static function getWeeklyRegisteredUserCount($db) {
     //     try {

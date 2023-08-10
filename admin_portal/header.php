@@ -791,6 +791,13 @@ $favIcon1 = '';
     </a>
 </li>
 
+<li class="">
+    <a href="x_amount_user_report.php">
+        <span class="pcoded-micon"><i class="feather icon-award"></i></span>
+        <span class="pcoded-mtext">User x amount report</span>
+    </a>
+</li>
+
 
 
 <li class="">
