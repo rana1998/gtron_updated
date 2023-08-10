@@ -295,7 +295,7 @@ $favIcon1 = '';
 
 
 
-<li class="pcoded-hasmenu">
+<!-- <li class="pcoded-hasmenu">
 <a href="javascript:void(0)">
 <span class="pcoded-micon"><i class="feather icon-package"></i></span>
 <span class="pcoded-mtext">Orders</span>
@@ -312,7 +312,7 @@ $favIcon1 = '';
 </a>
 </li>
 </ul>
-</li>
+</li> -->
 
 <li class="pcoded-hasmenu">
 <a href="javascript:void(0)">

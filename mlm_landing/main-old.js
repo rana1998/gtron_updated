@@ -68,20 +68,6 @@ async function fetchAccountData() {
 
   // Get connected chain id from Ethereum node
   const chainId = await web3.eth.getChainId();
-
-  // Check if the connected chain id matches the TRC20 chain id (e.g., Tron's chain id)
-  const trc20ChainId = 195; // Example TRC20 chain id (Tron)
-  if (chainId !== trc20ChainId) {
-    // Display a message telling the user to switch to TRC20 chain
-    Toastify({
-      text: "Please switch your wallet to the TRC20 chain (e.g., Tron) to use this app.",
-      duration: 5000,
-      // Other toast options...
-    }).showToast();
-    return; // Return without further processing
-  }
-
-  
   // Load chain information over an HTTP API
   const chainData = evmChains.getChain(chainId);
 //   document.querySelector("#network-name").textContent = chainData.name;

@@ -192,12 +192,12 @@ $count++;
                             <div class="row align-items-end">
                                 <div class="col-12">
                                     <h5 class="text-white"><?php echo $pamount;  ?></h5>
-                                    <h6 class="text-white m-b-0">Approved Withdrawal</h6>
+                                    <h6 class="text-white m-b-0">Completed Withdrawal</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <p class="text-white m-b-0"><?php echo 'Total Approved Withdrawal Request: '.$count;   ?>
+                            <p class="text-white m-b-0"><?php echo 'Total Completed Withdrawal Request: '.$count;   ?>
                             </p>
                         </div>
                     </div>
@@ -225,17 +225,17 @@ $count++;
                             <div class="row align-items-end">
                                 <div class="col-12">
                                     <h5 class="text-white"><?php echo $count; ?></h5>
-                                    <h6 class="text-white m-b-0">Approved Package</h6>
+                                    <h6 class="text-white m-b-0">Completed Package</h6>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <p class="text-white m-b-0">Total Approved Package. </p>
+                            <p class="text-white m-b-0">Total Completed Package. </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Approved Investment Count -->
+                <!-- Completed Investment Count -->
                 <?php 
 $select= "SELECT sum(amount) FROM `donate`";
 $res=mysqli_query($con,$select);
@@ -384,14 +384,14 @@ $iwallet = 0;
 
 
     ?>
-                                    <h5 class="text-white">Pool Amount: $<?php echo $current_balance; ?></h5>
+                                    <h5 class="text-white">Dividend  Amount: $<?php echo $current_balance; ?></h5>
                                     <h5 class="text-white">Total Sale: $<?php echo $total_income; ?></h5>
                                     <!-- <h6 class="text-white m-b-0">Users Total Balance</h6> -->
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <p class="text-white m-b-0">Total Pool Amount & Sale</p>
+                            <p class="text-white m-b-0">Total Dividend Amount & Sale</p>
                         </div>
                     </div>
                 </div>

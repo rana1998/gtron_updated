@@ -114,7 +114,7 @@
                                                                         <th>Phone</th>
                                                                         <th>Status</th>
                                                                         <th>OTP</th>
-                                                                        <th>Date</th>
+                                                                        <th>Datetime</th>
                                                                         <th>Login Status</th>
                                                                         <th>Action</th>
                                                                     </tr>
@@ -155,7 +155,9 @@
                                                                 
                                                                 
                                                                 <td><?php echo $data['otp_code']  ?></td>
-                                                                <td><?php echo date('Y-m-d',strtotime($data['date']) );  ?></td>
+                                                                <!-- <td><?php echo date('Y-m-d',strtotime($data['date']) );  ?></td> -->
+                                                                <td><?php echo date('Y-m-d:h-m-s',strtotime($data['date']) );  ?></td>
+
                                                                 
                                                                 
                                                                 <td><?php if ($loginStatus == 'Unblock') {
