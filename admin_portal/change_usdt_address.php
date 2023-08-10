@@ -239,8 +239,9 @@
                             </div>
                         </div>
 
+ <?php include "footer.php"; ?>
 
-    <script>
+ <script>
 	// START OTP VALIDATION
 	$(".sendOtpEmail").click(function(){
         let sendMail = 'Email Send';
@@ -299,6 +300,3 @@
     })
 	// END OTP VALIDATION
     </script>
-
-
- <?php include "footer.php"; ?>

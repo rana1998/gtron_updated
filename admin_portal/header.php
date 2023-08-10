@@ -563,9 +563,9 @@ $favIcon1 = '';
 
 
 
+<!-- - Disable KYC (Might be enabled in future) -->
 
-
-<li class="pcoded-hasmenu">
+<!-- <li class="pcoded-hasmenu">
 <a href="javascript:void(0)">
 <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
 <span class="pcoded-mtext">KYC</span>
@@ -582,7 +582,16 @@ $favIcon1 = '';
 </a>
 </li>
 </ul>
+</li> -->
+
+<!-- - Disable KYC (Might be enabled in future) -->
+<li class="">
+    <a href="javascript:void(0)">
+        <span class="pcoded-micon"><i class="feather icon-award"></i></span>
+        <span class="pcoded-mtext">Disabled KYC</span>
+    </a>
 </li>
+
 
 
 
