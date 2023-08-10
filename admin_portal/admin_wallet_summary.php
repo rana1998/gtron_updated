@@ -51,7 +51,7 @@ $response = AdminHelper::getAdminWalletSummary($db);
                                             <th>Wallet Address</th>
                                             <th>Email</th>
                                             <th>Owner</th>
-                                            <th>Gtron commission</th>
+                                            <th>USDT commission</th>
                                             <th>Date</th>
                                             <th>Claim</th>
                                         </tr>
@@ -62,7 +62,7 @@ $response = AdminHelper::getAdminWalletSummary($db);
                                             <th>Wallet Address</th>
                                             <th>Email</th>
                                             <th>Owner</th>
-                                            <th>Gtron commission</th>
+                                            <th>USDT commission</th>
                                             <th>Date</th>
                                             <th>Claim</th>
                                         </tr>

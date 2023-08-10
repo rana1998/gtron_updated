@@ -112,7 +112,7 @@
                                                                         <th>Price</th>
                                                                         <th>Transaction ID</th>
                                                                         <th>Status</th>
-                                                                        <th>Datetime</th>
+                                                                        <th>Transaction Date</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -177,7 +177,7 @@
                                                                         <th>Price</th>
                                                                         <th>Transaction ID</th>
                                                                         <th>Status</th>
-                                                                        <th>Datetime</th>
+                                                                        <th>Transaction Date</th>
                                                                     </tr>
                                                                 </tfoot>
                                                             </table>

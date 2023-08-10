@@ -71,8 +71,8 @@ $response = AdminHelper::getDailyUserLevelBonusHistory($db);
                                             <th>Level</th>
                                             <th>User name</th>
                                             <th>Bonus amount</th>
-                                            <th>Level</th>
-                                            <th>Date</th>
+                                            <!-- <th>Level</th> -->
+                                            <th>Datetime</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -81,8 +81,8 @@ $response = AdminHelper::getDailyUserLevelBonusHistory($db);
                                             <th>Level</th>
                                             <th>User name</th>
                                             <th>Bonus amount</th>
-                                            <th>Level</th>
-                                            <th>Date</th>
+                                            <!-- <th>Level</th> -->
+                                            <th>Datetime</th>
                                         </tr>
                                     </tfoot>                                
                                     <tbody>
@@ -93,7 +93,7 @@ $response = AdminHelper::getDailyUserLevelBonusHistory($db);
                                                 <td><?php echo $data["sender"]; ?></td>
                                                 <td><?php echo $data["receiver"]; ?></td>
                                                 <td><?php echo $data["bonus_amount"]; ?></td>
-                                                <td><?php echo $data["level"]; ?></td>
+                                                <!-- <td><?php echo $data["level"]; ?></td> -->
                                                 <td><?php echo $data["date"]; ?></td>
                                             </tr>
                                         <?php }

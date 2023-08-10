@@ -73,20 +73,20 @@ $response = AdminHelper::getDailyUserPackageHistory($db);
                                             <th>Package id</th>
                                             <th>Package name</th>
                                             <th>Package price</th>
-                                            <th>Tax</th>
+                                            <!-- <th>Tax</th>
                                             <th>Amount after tax</th>
                                             <th>Mode</th>
                                             <th>Type</th>
-                                            <th>Bank</th>
-                                            <th>Image</th>
-                                            <th>Days</th>
+                                            <th>Bank</th> -->
+                                            <!-- <th>Image</th>
+                                            <th>Days</th> -->
                                             <th>Transaction id</th>
                                             <th>Status</th>
-                                            <th>ROI Status</th>
+                                            <!-- <th>ROI Status</th>
                                             <th>Received roi</th>
-                                            <th>No of roi</th>
-                                            <th>Reason</th>
-                                            <th>Approved by</th>
+                                            <th>No of roi</th> -->
+                                            <!-- <th>Reason</th>
+                                            <th>Approved by</th> -->
                                             <th>Date</th>
                                         </tr>
                                     </thead>
@@ -98,20 +98,20 @@ $response = AdminHelper::getDailyUserPackageHistory($db);
                                             <th>Package id</th>
                                             <th>Package name</th>
                                             <th>Package price</th>
-                                            <th>Tax</th>
+                                            <!-- <th>Tax</th>
                                             <th>Amount after tax</th>
                                             <th>Mode</th>
                                             <th>Type</th>
                                             <th>Bank</th>
                                             <th>Image</th>
-                                            <th>Days</th>
+                                            <th>Days</th> -->
                                             <th>Transaction id</th>
                                             <th>Status</th>
-                                            <th>ROI Status</th>
+                                            <!-- <th>ROI Status</th>
                                             <th>Received roi</th>
                                             <th>No of roi</th>
                                             <th>Reason</th>
-                                            <th>Approved by</th>
+                                            <th>Approved by</th> -->
                                             <th>Date</th>
                                         </tr>
                                     </tfoot>                                
@@ -125,20 +125,20 @@ $response = AdminHelper::getDailyUserPackageHistory($db);
                                                 <td><?php echo $data["pkg_id"]; ?></td>
                                                 <td><?php echo $data["pkg_name"]; ?></td>
                                                 <td><?php echo $data["pkg_price"]; ?></td>
-                                                <td><?php echo $data["tax"]; ?></td>
+                                                <!-- <td><?php echo $data["tax"]; ?></td>
                                                 <td><?php echo $data["amount_after_tax"]; ?></td>
                                                 <td><?php echo $data["mode"]; ?></td>
                                                 <td><?php echo $data["type"]; ?></td>
                                                 <td><?php echo $data["bank"]; ?></td>
                                                 <td><?php echo $data["image"]; ?></td>
-                                                <td><?php echo $data["days"]; ?></td>
+                                                <td><?php echo $data["days"]; ?></td> -->
                                                 <td><?php echo $data["trans_id"]; ?></td>
                                                 <td><?php echo $data["status"]; ?></td>
-                                                <td><?php echo $data["roi_status"]; ?></td>
+                                                <!-- <td><?php echo $data["roi_status"]; ?></td>
                                                 <td><?php echo $data["received_roi"]; ?></td>
                                                 <td><?php echo $data["no_of_roi"]; ?></td>
                                                 <td><?php echo $data["reason"]; ?></td>
-                                                <td><?php echo $data["approved_by"]; ?></td> 
+                                                <td><?php echo $data["approved_by"]; ?></td>  -->
                                                 <td><?php echo $data["date"]; ?></td> 
                                             </tr>
                                         <?php }
@@ -188,20 +188,20 @@ function getData() {
                         obj.pkg_id,
                         obj.pkg_name,
                         obj.pkg_price,
-                        obj.tax,
-                        obj.amount_after_tax,
-                        obj.mode,
-                        obj.type,
-                        obj.bank,
-                        obj.image,
-                        obj.days,
+                        // obj.tax,
+                        // obj.amount_after_tax,
+                        // obj.mode,
+                        // obj.type,
+                        // obj.bank,
+                        // obj.image,
+                        // obj.days,
                         obj.trans_id,
                         obj.status,
-                        obj.roi_status,
-                        obj.received_roi,
-                        obj.no_of_roi,
-                        obj.reason,
-                        obj.approved_by, 
+                        // obj.roi_status,
+                        // obj.received_roi,
+                        // obj.no_of_roi,
+                        // obj.reason,
+                        // obj.approved_by, 
                         obj.date, 
                     ]);
                 });
