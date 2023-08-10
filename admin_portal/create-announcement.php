@@ -32,7 +32,9 @@ if(isset($_GET['id']) and isset($_GET['action']) and $_GET['action']=='delete')
 
 // create announcement
 	if(isset($_POST['create'])){
-		
+		if(isset($_SESSION['isOTPmatch']) && $_SESSION['isOTPmatch'] == true) {
+		//OTP VALIDATION VIA SESSION SESSION['isOTPmatch'] WILL BE UPDATED AS FALSE WHENEVER USER RELOAD PAGE AND GOT TO ANOTHER PAGE AFTER SENDING OTP IN MAIL
+		$_SESSION['isOTPmatch'] = false;
 		$title = mysqli_real_escape_string($con,$_POST['title']);
 		$description = mysqli_real_escape_string($con,$_POST['description']);
 		$image = $_FILES['image'];
@@ -93,6 +95,13 @@ if(isset($_GET['id']) and isset($_GET['action']) and $_GET['action']=='delete')
             header("Location: create-announcement.php");
             exit();
         }
+
+	} 
+	else {
+		$_SESSION['errorMsg'] = "Please valided your email via OTP.";
+		header("Location: create-announcement.php");
+		exit();
+	}
 	    
 	}
 ?>
@@ -166,6 +175,25 @@ if(isset($_GET['id']) and isset($_GET['action']) and $_GET['action']=='delete')
 							</div>
 							<div class="card-body">
 								<form  class="md-float-material form-material" method="POST" enctype="multipart/form-data">
+									<!-- START OTP VALIDATION -->
+                                    <div class="mb-3">
+                                        <input type="hidden" value="" id="gtron-wallet"/>
+                                        <div class="input-group "> 
+                                            <input type="hidden" value="<?php echo $_SESSION['admin_name'];?>" id="owner" />
+                                            <input type="text" name="otpCode" class="form-control" id="admin-mail" value="<?php echo $_SESSION['admin_email'];?>" placeholder="Otp Code Sent on Email" >
+                                            <button class="btn btn-secondary sendOtpEmail" type="button" >SEND OTP</button>
+                                        </div>
+                                        <p class="text-success otpSendSuccessMessage"></p>
+                                        <p class="text-danger otpSendErrorMessage"></p>
+
+                                        <div class="input-group ">
+                                            <input type="text" class="form-control" id="otp-value" placeholder="Enter Otp and confirm">
+                                            <button class="btn btn-secondary confirmOtp" type="button" >CONFIRM OTP</button>
+                                        </div>
+                                        <p class="text-success confirmOtpSuccessMessage"></p>
+                                        <p class="text-danger confirmOtpErrorMessage"></p>
+                                    </div>
+                                    <!-- END OTP VALIDATION -->
 									<div class="form-group row">
 										<label class="col-sm-3 col-form-label">Title</label>
 										<div class="col-sm-9">
@@ -255,3 +283,63 @@ if(isset($_GET['id']) and isset($_GET['action']) and $_GET['action']=='delete')
 <?php
 include "footer.php";
 ?>
+
+<script>
+	// START OTP VALIDATION
+	$(".sendOtpEmail").click(function(){
+        let sendMail = 'Email Send';
+        let owner = document.getElementById('owner').value;
+        let email = document.getElementById('admin-mail').value;
+		if(email == ''){
+            alert("please enter valid enail");
+            return;
+        }
+
+        $(".sendOtpEmail").prop('disabled', true);
+        $(".sendOtpEmail").text('Processing');
+        $.post("./ajax/ajax_admin_otp_generator.php",{otp_send:sendMail, owner:owner, email:email}).done(function (feedback) {
+            if(feedback == 'Email Sent Successfully') {
+                $('.otpSendSuccessMessage').text(feedback);
+                $('.otpSendErrorMessage').text('');
+            } else {
+                $('.otpSendSuccessMessage').text('');
+                $('.otpSendErrorMessage').text("Oops something went wrong!");
+            }
+            $(".sendOtpEmail").prop('disabled', false);
+            $(".sendOtpEmail").text('SEND OTP');
+            // ...
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus, errorThrown);
+            alert("Error occurred during the AJAX request. Check the console for details.");
+        })
+    })
+
+    $(".confirmOtp").click(function(){
+        var userInptOTP = document.getElementById('otp-value').value;
+        let owner = document.getElementById('owner').value;
+        let email = document.getElementById('admin-mail').value;
+        if(userInptOTP == ''){
+            alert("please enter valid otp");
+            return;
+        } 
+        $(".confirmOtp").prop('disabled', true);
+        $(".confirmOtp").text('Processing');
+        $.post("./ajax/ajax_admin_otp_confirmation.php",{action:"confirm-otp",userInptOTP:userInptOTP, owner:owner, email:email}).done(function (feedback) {
+            if(feedback == 'success') {
+                $('.confirmOtpSuccessMessage').text(feedback);
+                $('.confirmOtpErrorMessage').text('')
+            } else {
+                $('.confirmOtpSuccessMessage').text('');
+                $('.confirmOtpErrorMessage').text(feedback);
+            }
+            $(".confirmOtp").prop('disabled', false);
+            $(".confirmOtp").text('CONFIRM OTP');
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus, errorThrown);
+            alert("Error occurred during the AJAX request. Check the console for details.");
+        })
+    })
+	// END OTP VALIDATION
+</script>

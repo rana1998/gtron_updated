@@ -1,4 +1,5 @@
 <?php 
+error_reporting(E_ALL & ~E_WARNING);
 
 include "db_config.php";
 session_start();
@@ -489,16 +490,26 @@ $favIcon1 = '';
 <span class="pcoded-mtext">Taxes/Commission</span>
 </a>
 <ul class="pcoded-submenu">
-<li class="">
-<a href="deposit-tax.php">
-<span class="pcoded-mtext">Deposit Tax</span>
-</a>
-</li>
-<li class="">
-<a href="withdrawal-tax.php">
-<span class="pcoded-mtext">Withdrawal Tax</span>
-</a>
-</li>
+    <!-- <li class="">
+        <a href="deposit-tax.php">
+            <span class="pcoded-mtext">Deposit Tax</span>
+        </a>
+    </li>
+    <li class="">
+        <a href="withdrawal-tax.php">
+            <span class="pcoded-mtext">Withdrawal Tax</span>
+        </a>
+    </li> -->
+    <li class="">
+        <a href="internal_wallet_transfer_tax.php">
+            <span class="pcoded-mtext">Internal Wallet Transfer Tax</span>
+        </a>
+    </li>
+    <li class="">
+        <a href="admin_tax_withdrawal.php">
+            <span class="pcoded-mtext">Admin Tax Withdrawal</span>
+        </a>
+    </li>
 </ul>
 </li>
 
@@ -724,12 +735,12 @@ $favIcon1 = '';
     </a>
 </li>
 
-<li class="">
+<!-- <li class="">
     <a href="gtron_total_token_balance.php">
         <span class="pcoded-micon"><i class="feather icon-award"></i></span>
         <span class="pcoded-mtext">Gtron Total Token Balance</span>
     </a>
-</li>
+</li> -->
 
 <li class="">
     <a href="user_login_history.php">

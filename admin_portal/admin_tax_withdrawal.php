@@ -1,71 +1,44 @@
 <?php
 ob_start();
 include "header.php";
-// insert code
-	if(isset($_POST['create'])){
+
+// withdrawal-tax.php => admin tax withdrawal.php
+//All withdrawal tax flow has been merged here.
+
+//select percentages
+$q="select * from taxes where type='withdrawal'";
+$result = mysqli_query($con,$q);
+$res = mysqli_fetch_assoc($result);
+
+
+// Update ROI Percentage Value
+	if(isset($_POST['update_roi'])){
 		if(isset($_SESSION['isOTPmatch']) && $_SESSION['isOTPmatch'] == true) {
-		//OTP VALIDATION VIA SESSION SESSION['isOTPmatch'] WILL BE UPDATED AS FALSE WHENEVER USER RELOAD PAGE AND GOT TO ANOTHER PAGE AFTER SENDING OTP IN MAIL
-		$_SESSION['isOTPmatch'] = false;
+        //OTP VALIDATION VIA SESSION SESSION['isOTPmatch'] WILL BE UPDATED AS FALSE WHENEVER USER RELOAD PAGE AND GOT TO ANOTHER PAGE AFTER SENDING OTP IN MAIL
+        $_SESSION['isOTPmatch'] = false;
+		$roiVal = mysqli_real_escape_string($con,$_POST['percentage']);
+		$update_roi = "UPDATE taxes SET percentage = '$roiVal' where type='withdrawal'";
+		$run_update = mysqli_query($con, $update_roi);
 		
-	   $file= $_FILES['file'];
-	   //echo $file;
-	   //exit();
-	   //Image settings
-        $ImgName = $file['name'];
-        $ImgError = $file['error'];
-        $ImgTemp = $file['tmp_name'];
-        $ImgSize = $file['size'];
-    
-        $ImgText = explode('.',$ImgName);
-        $ImgCheck = strtolower(end($ImgText));
+		// Insert into roi_roi_percentage_summary table
+		$insert = "INSERT INTO percentages_summary(`type`,`percentage`)
+					VALUES('withdrawal','$roiVal')";
+		$run_insert = mysqli_query($con, $insert);
+			if(!$run_update && !$run_insert){
+				echo '<h6>'.mysqli_error( $con ).'</h6>';
+				exit();
+			}
 
-        if(empty($ImgName))
-        {
-            $_SESSION['errorMsg'] = "Please select logo";
-            header("Location: favicon_management.php");
+		$_SESSION['successMsg']='Admin Withdrawal Tax Update Successfully.';
+		header("Location: admin_tax_withdrawal.php");
+		exit();
+        } 
+        else {
+            $_SESSION['errorMsg'] = "Please valided your email via OTP.";
+            header("Location: admin_tax_withdrawal.php");
             exit();
         }
-        elseif($ImgSize > 5000000)
-        {
-            $_SESSION['errorMsg'] = "Logo size is greater than 5MB";
-            header("Location: favicon_management.php");
-            exit();
-        }
-        elseif($ImgCheck=='png' || $ImgCheck=='jpg' || $ImgCheck=='jpeg')
-        {
-          $ImgName = preg_replace("/\s+/","", $ImgName);
-            $ImgDestinationFile = 'images/logoIcon/'.md5(rand()).'-'.$ImgName;
-            move_uploaded_file($ImgTemp, $ImgDestinationFile);
-            
-            $q="update project_management set fav_icon = '$ImgDestinationFile'";
-            
-            $result= mysqli_query($con,$q);
-            
-            if($result==TRUE)
-            {
-                $_SESSION['successMsg'] = "Logo updated successfully";
-                header("Location: favicon_management.php");
-                exit();
-            }
-    
-        }
-        else
-        {
-            $_SESSION['errorMsg'] = "Image format not PNG, JPG, JPEG";
-            header("Location: favicon_management.php");
-            exit();
-        }
-        
-		} 
-		else {
-			$_SESSION['errorMsg'] = "Please valided your email via OTP.";
-            header("Location: favicon_management.php");
-            exit();
-		}
-
-		
 	}
-
 ?>
 <!-- Main-body start -->
 <div class="main-body">
@@ -76,8 +49,8 @@ include "header.php";
 				<div class="col-lg-8">
 					<div class="page-header-title">
 						<div class="d-inline">
-							<h4>Favicon</h4>
-							<span>Favicon Management </span>
+							<h4>Admin Tax Withdrawal</h4>
+							<span>Check and Update Tax Value. </span>
 						</div>
 					</div>
 				</div>
@@ -87,7 +60,7 @@ include "header.php";
 							<li class="breadcrumb-item">
 								<a href="index-1.htm"> <i class="feather icon-home"></i> </a>
 							</li>
-							<li class="breadcrumb-item"><a href="#!">Favicon</a> </li>
+							<li class="breadcrumb-item"><a href="#!">Admin Tax Withdrawal</a> </li>
 						</ul>
 					</div>
 				</div>
@@ -95,7 +68,6 @@ include "header.php";
 		</div>
 		<!-- Page-header end -->
 		<div class="page-body">
-		
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-8 ml-auto mr-auto">
@@ -104,7 +76,7 @@ include "header.php";
 							<div class="card-block">
 								<div class="row m-b-20">
 									<div class="col-md-12">
-										<h3 class="text-center ">Update Favicon</h3>
+										<h3 class="text-center ">Admin Tax Withdrawal</h3>
 
                                     <!-- Success Message -->
                                     <?php if (isset($_SESSION['successMsg'])) {
@@ -137,8 +109,8 @@ include "header.php";
 								</div>
 							</div>
 							<div class="card-body">
-								<form  class="md-float-material form-material" enctype="multipart/form-data" method="POST">
-									<!-- START OTP VALIDATION -->
+								<form  class="md-float-material form-material" action="" method="POST">
+                                    <!-- START OTP VALIDATION -->
                                     <div class="mb-3">
                                         <input type="hidden" value="" id="gtron-wallet"/>
                                         <div class="input-group "> 
@@ -158,15 +130,14 @@ include "header.php";
                                     </div>
                                     <!-- END OTP VALIDATION -->
 									<div class="form-group row">
-										<label class="col-sm-3 col-form-label">Favicon (png, jpg, jpeg only)</label>
+										<label class="col-sm-3 col-form-label">Tax %</label>
 										<div class="col-sm-9">
-											<input type="file" class="form-control" name="file" id="file"  value="">
+											<input autocomplete="off" type="text" class="form-control" name="percentage" id="roi_percentage"  value="<?=$res['percentage']?>">
 										</div>
 									</div>
-
 									<div class="form-group row">
 										<div class="col-md-12">
-											<button type="submit" class="btn btn-warning btn-md btn-block waves-effect text-center m-b-20" name = "create">Update</button>
+											<button type="submit" class="btn btn-warning btn-md btn-block waves-effect text-center m-b-20" name = "update_roi">Update</button>
 										</div>
 									</div>
 								</form>
@@ -174,7 +145,51 @@ include "header.php";
 						</div>
 					</div>
 				</div>
-			
+				<!-- ROI Percentage Table -->
+				<div class="row">
+					<div class="col-sm-12">
+						<!-- HTML5 Export Buttons table start -->
+						<div class="card">
+							<div class="card-header table-card-header text-center">
+							</div>
+							<div class="card-block">
+								<div class="dt-responsive table-responsive">
+									<table id="basic-btn" class="table table-sm table-striped table-bordered " data-page-length='10'>
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Percentage</th>
+												<th>Date</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php
+											$sql = "SELECT * FROM `percentages_summary` WHERE type='withdrawal' ORDER BY `date` DESC";
+											$result = mysqli_query($con, $sql);
+											$x= 1;
+											while ( $data = mysqli_fetch_array($result)):
+											?>
+											<tr>
+												<td><?php echo $x++;  ?></td>
+												<td><?php echo $data['percentage'].'%';  ?></td>
+												<td><?php echo date('Y-m-d',strtotime($data['date']) );  ?></td>
+											</tr>
+											<?php endwhile; ?>
+										</tbody>
+										<tfoot>
+										<tr>
+											<th>#</th>
+											<th>Percentage</th>
+											<th>Date</th>
+										</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- HTML5 Export Buttons end -->
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
