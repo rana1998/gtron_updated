@@ -16,12 +16,16 @@ if (isset($_POST['create'])) {
         exit();
     }
 
-    if ($refferalusername == "") {
-        $sponsername = NULL;
+
+    if ($refferalusername == "" || $refferalusername == 0) {
+        // Whichever user join without referal code willbe placed under admin id
+        // $sponsername = NULL;
+        $sponsername = $_SESSION['admin_name'];
+        
     } else {
         $sponsername = $refferalusername;
     }
-    
+
     $query = "SELECT `id` FROM `user_registration` ORDER BY `id` DESC LIMIT 1";
     $result = mysqli_query($con, $query);
     if ($result) {
@@ -30,11 +34,11 @@ if (isset($_POST['create'])) {
         $last = $lastId + 1;
         $username = 'MLM' . $last;
         
-        if($refferalusername == "") {
-            $insert = "INSERT INTO `user_registration`(`wallet_address`, `user_name`, `verified`, `status`, `kyc`) VALUES ('$walletaddress','$username','1','Approved', 'Verified')";
-        } else {
+        // if($refferalusername == "") {
+        //     $insert = "INSERT INTO `user_registration`(`wallet_address`, `user_name`, `verified`, `status`, `kyc`) VALUES ('$walletaddress','$username','1','Approved', 'Verified')";
+        // } else {
         echo   $insert = "INSERT INTO `user_registration`(`wallet_address`, `sponsor_name`, `user_name`, `verified`, `status`, `kyc`) VALUES ('$walletaddress','$sponsername','$username','1','Approved', 'Verified')";
-        }
+        // }
 
         $run_insert = mysqli_query($con, $insert);
         
@@ -56,9 +60,6 @@ if (isset($_POST['create'])) {
         $_SESSION['errorMsg'] = 'Please valided your email via OTP.';
         header("Location: create_user.php");
         exit();
-        // $_SESSION['errorMsg'] = "Please valided your email via OTP.";
-        // header("Location: edit_balance.php?id=$getid");
-        // exit();
     }
 }
 
