@@ -2,12 +2,12 @@
 require_once('../core/config.php');
 $pdo = getDB();   
 session_start();
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require '../../member/phpmailer/src/Exception.php';
-require '../../member/phpmailer/src/PHPMailer.php';
-require '../../member/phpmailer/src/SMTP.php';
-$mail = new PHPMailer(true);
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
+// require '../../member/phpmailer/src/Exception.php';
+// require '../../member/phpmailer/src/PHPMailer.php';
+// require '../../member/phpmailer/src/SMTP.php';
+// $mail = new PHPMailer(true);
 
 try {
 
