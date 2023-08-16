@@ -262,16 +262,11 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="otpModalLabel">Send OTP via Email</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#otpModal').modal('hide');">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-
-                                        <!-- <form id="otpForm">
-                                            <input type="email" name="email" placeholder="Email Address" required>
-                                            <button type="submit" class="btn btn-primary">Send OTP</button>
-                                        </form> -->
                                         <!-- START OTP VALIDATION -->
                                         <div class="mb-3">
                                             <input type="hidden" value="" id="gtron-wallet"/>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2023 at 08:42 AM
+-- Generation Time: Aug 14, 2023 at 06:20 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -93,16 +93,18 @@ INSERT INTO `admin_log` (`id`, `user_name`, `activity`, `date`) VALUES
 CREATE TABLE `admin_login` (
   `id` int(1) NOT NULL,
   `user_name` varchar(20) NOT NULL,
-  `password` varchar(100) NOT NULL
+  `password` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `otp_code` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin_login`
 --
 
-INSERT INTO `admin_login` (`id`, `user_name`, `password`) VALUES
-(1, 'control', '$2y$10$HSX6Fk1TZYi0DUGie5wMcudvNKLJxfgV7V7RPzPHV1IcPX.IpVas2'),
-(2, 'master', '$2y$10$g8YxOlPBwY6YxRJHVj6V8.XQD7Svdk4HWfzJHhgJRQpZmdncAG/RO');
+INSERT INTO `admin_login` (`id`, `user_name`, `password`, `email`, `otp_code`) VALUES
+(1, 'control', '$2y$10$HSX6Fk1TZYi0DUGie5wMcudvNKLJxfgV7V7RPzPHV1IcPX.IpVas2', '', 0),
+(2, 'master', '$2y$10$g8YxOlPBwY6YxRJHVj6V8.XQD7Svdk4HWfzJHhgJRQpZmdncAG/RO', '2015kshitij14@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -143,7 +145,7 @@ CREATE TABLE `admin_wallet_summary` (
 --
 
 INSERT INTO `admin_wallet_summary` (`owner_id`, `email`, `wallet_address`, `owner`, `gtron_commission`, `otp_code`, `date`) VALUES
-(1, 'selvaraj@gtron.io', 'TPHyyDRvbT3LgoSmqWTHVuMUBeZB45jKvk', 'Selvaraj', 100, 0, '2023-07-27'),
+(1, 'selvaraj@gtron.io', 'TPHyyDRvbT3LgoSmqWTHVuMUBeZB45jKvk', 'Selvaraj', 100, 476966, '2023-07-27'),
 (2, 'rajesh@gtron.io', 'TJCGXFG5VbfK6UjwGsyF9s4FFtWRfsk8gY', 'Rajesh', 200, 0, '2023-07-27'),
 (3, 'rajendran@gtron.io', 'TBDMNMhNPw9TbAeRsaFQL1fvHKUYQp5KNy', 'Rajendran', 100, 0, '2023-07-27'),
 (4, 'project', 'project@address', 'project features', 400, 0, '0000-00-00');
@@ -792,14 +794,7 @@ CREATE TABLE `package` (
   `id` int(11) NOT NULL,
   `package_name` varchar(255) DEFAULT NULL,
   `pkg_price` varchar(250) NOT NULL,
-  `distribution` float NOT NULL,
-  `no_of_days` int(11) DEFAULT NULL,
-  `percentage_per_day` float NOT NULL DEFAULT 0,
-  `min_amount` float NOT NULL DEFAULT 0,
-  `max_amount` float NOT NULL DEFAULT 0,
   `image` varchar(255) DEFAULT NULL,
-  `capital` varchar(255) DEFAULT NULL,
-  `status` varchar(255) NOT NULL DEFAULT 'active',
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
@@ -807,12 +802,13 @@ CREATE TABLE `package` (
 -- Dumping data for table `package`
 --
 
-INSERT INTO `package` (`id`, `package_name`, `pkg_price`, `distribution`, `no_of_days`, `percentage_per_day`, `min_amount`, `max_amount`, `image`, `capital`, `status`, `date`) VALUES
-(1, 'MLM 1', '50', 5, 30, 10, 20, 199, 'images/packageImages/765c36199e3725b9b40091849777f381-padlock.png', 'no', 'active', '2022-03-07 21:29:49'),
-(2, 'MLM 2', '100', 12, 90, 5, 200, 499, 'images/packageImages/765c36199e3725b9b40091849777f381-padlock.png', 'no', 'active', '2022-03-08 02:22:02'),
-(3, 'MLM 3', '250', 35, 180, 15, 500, 1000, 'images/packageImages/cc1487436993605a04db920612a121e5-starter.png', 'yes', 'active', '2022-03-08 13:04:11'),
-(4, 'MLM 4', '500', 80, NULL, 0, 0, 0, NULL, NULL, 'active', '2022-05-17 14:35:19'),
-(5, 'MLM 5', '1000', 180, NULL, 0, 0, 0, NULL, NULL, 'active', '2022-05-17 14:35:19');
+INSERT INTO `package` (`id`, `package_name`, `pkg_price`, `image`, `date`) VALUES
+(1, 'MLM 1', '50', 'images/packageImages/765c36199e3725b9b40091849777f381-padlock.png', '2022-03-07 21:29:49'),
+(2, 'MLM 2', '100', 'images/packageImages/765c36199e3725b9b40091849777f381-padlock.png', '2022-03-08 02:22:02'),
+(3, 'MLM 3', '250', 'images/packageImages/cc1487436993605a04db920612a121e5-starter.png', '2022-03-08 13:04:11'),
+(4, 'MLM 4', '500', NULL, '2022-05-17 14:35:19'),
+(5, 'MLM 5', '1000', NULL, '2022-05-17 14:35:19'),
+(7, 'testing', '600', 'images/packageImages/2b480f9abc9f68f475b21b144a40b3a0-user-profile.png.png', '2023-08-10 11:26:41');
 
 -- --------------------------------------------------------
 
@@ -965,6 +961,38 @@ INSERT INTO `package_details` (`id`, `user_name`, `sponsor_name`, `pkg_id`, `pkg
 (114, 'MLM49', '', 1, 'MLM 1', 50, 0, 0, '', '', '', '', 0, 'TXN-64b77e8c7d1fb', 'Approved', 'Active', 0, 0, '', '', '2023-07-19 02:41:24'),
 (115, 'MLM49', '', 1, 'MLM 1', 50, 0, 0, '', '', '', '', 0, 'TXN-64b7d37c14405', 'Approved', 'Active', 0, 0, '', '', '2023-07-19 08:43:48'),
 (116, 'MLM68', '', 1, 'MLM 1', 50, 0, 0, '', '', '', '', 0, 'TXN-64bf9e56bceb8', 'Approved', 'Active', 0, 0, '', '', '2023-07-25 06:35:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_old`
+--
+
+CREATE TABLE `package_old` (
+  `id` int(11) NOT NULL,
+  `package_name` varchar(255) DEFAULT NULL,
+  `pkg_price` varchar(250) NOT NULL,
+  `distribution` float NOT NULL,
+  `no_of_days` int(11) DEFAULT NULL,
+  `percentage_per_day` float NOT NULL DEFAULT 0,
+  `min_amount` float NOT NULL DEFAULT 0,
+  `max_amount` float NOT NULL DEFAULT 0,
+  `image` varchar(255) DEFAULT NULL,
+  `capital` varchar(255) DEFAULT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'active',
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `package_old`
+--
+
+INSERT INTO `package_old` (`id`, `package_name`, `pkg_price`, `distribution`, `no_of_days`, `percentage_per_day`, `min_amount`, `max_amount`, `image`, `capital`, `status`, `date`) VALUES
+(1, 'MLM 1', '50', 5, 30, 10, 20, 199, 'images/packageImages/765c36199e3725b9b40091849777f381-padlock.png', 'no', 'active', '2022-03-07 21:29:49'),
+(2, 'MLM 2', '100', 12, 90, 5, 200, 499, 'images/packageImages/765c36199e3725b9b40091849777f381-padlock.png', 'no', 'active', '2022-03-08 02:22:02'),
+(3, 'MLM 3', '250', 35, 180, 15, 500, 1000, 'images/packageImages/cc1487436993605a04db920612a121e5-starter.png', 'yes', 'active', '2022-03-08 13:04:11'),
+(4, 'MLM 4', '500', 80, NULL, 0, 0, 0, NULL, NULL, 'active', '2022-05-17 14:35:19'),
+(5, 'MLM 5', '1000', 180, NULL, 0, 0, 0, NULL, NULL, 'active', '2022-05-17 14:35:19');
 
 -- --------------------------------------------------------
 
@@ -1177,19 +1205,16 @@ CREATE TABLE `pre_registration` (
   `referrer_user_id` varchar(50) DEFAULT NULL,
   `reffered_user_count` int(11) NOT NULL,
   `gtron` int(11) NOT NULL,
-  `registration_date` timestamp NOT NULL DEFAULT current_timestamp()
+  `registration_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `is_24hour_later_email_sent` int(30) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pre_registration`
 --
 
-INSERT INTO `pre_registration` (`id`, `user_name`, `email`, `country`, `contact_no`, `message`, `referral_link`, `is_referred`, `user_referral_id`, `referrer_user_id`, `reffered_user_count`, `gtron`, `registration_date`) VALUES
-(55, 'Kshitij rana', '2015kshitij14@gmail.com', 'Namibia', '9760492063', '', 'https://gtron.io?ref=dLfdEe', 1, 'dLfdEe', 'aO2UPF', 1, 1000, '2023-08-04 18:30:00'),
-(56, 'Kshitij rana', '2015kshitij14@gmail.com', 'Namibia', '9760492063', '', 'https://gtron.io?ref=YXxx9f', 1, 'YXxx9f', 'aO2UPF', 0, 500, '2023-08-04 18:30:00'),
-(57, 'Kshitij rana', 'test@gmail.com', 'Albania', '9876543210', 'wwwwww', 'https://gtron.io?ref=SulHvB', 1, 'SulHvB', 'aO2UPF', 0, 500, '2023-08-04 18:30:00'),
-(58, 'Kshitij rana', 'test1@gmail.com', 'Albania', '9876543211', 'wwwwww', 'https://gtron.io?ref=dU2Rdn', 1, 'dU2Rdn', 'aO2UPF', 0, 500, '2023-08-04 18:30:00'),
-(59, 'Kshitij rana', 'test2@gmail.com', 'Anguilla', '123456789', '', 'https://gtron.io?ref=IZeXm1', 1, 'IZeXm1', 'dLfdEe', 0, 500, '2023-08-04 18:30:00');
+INSERT INTO `pre_registration` (`id`, `user_name`, `email`, `country`, `contact_no`, `message`, `referral_link`, `is_referred`, `user_referral_id`, `referrer_user_id`, `reffered_user_count`, `gtron`, `registration_date`, `is_24hour_later_email_sent`) VALUES
+(69, 'Kshitij rana', '2015kshitij14@gmail.com', 'India', '9760492063', 'hell', 'https://gtron.io?ref=t5FCpH', 1, 't5FCpH', '', 0, 500, '2023-08-06 18:30:00', 0);
 
 -- --------------------------------------------------------
 
@@ -1523,7 +1548,7 @@ CREATE TABLE `user_registration` (
 --
 
 INSERT INTO `user_registration` (`id`, `wallet_address`, `transaction_password`, `pkg_id`, `sponsor_name`, `user_name`, `address`, `current_balance`, `iwallet`, `pending_amount`, `total_income`, `max_income`, `active_investment`, `threex_amount_limit`, `threex_amount`, `eligible_shares`, `first_bonus`, `second_bonus`, `password`, `full_name`, `email`, `verified`, `sflag`, `usdttrc_address`, `email_code`, `otp_code`, `mobile`, `street`, `city`, `state`, `postal_code`, `phone`, `country`, `profile_pic`, `total_invest`, `direct_team`, `total_team`, `d_sale`, `l1`, `l2`, `l3`, `l4`, `l5`, `l6`, `l7`, `l8`, `l9`, `l10`, `s1`, `s2`, `s3`, `s4`, `s5`, `s6`, `s7`, `s8`, `s9`, `s10`, `db`, `idb`, `idb_weekly`, `idb_monthly`, `roi`, `roi_daily`, `roi_today`, `roi_monthly`, `temp_roi`, `monthly_share`, `status`, `activation_fee`, `login_status`, `withdrawal_status`, `kyc`, `rank`, `team_sales`, `current_order_id`, `current_login`, `order_date`, `order_expires_at`, `date`, `package_purchase_count`, `last_updated_bonus`, `gtron_wallet`, `current_bonus_status`) VALUES
-(44, '0xcd596d19635540c3da9c9ab7f22157c1c0e76668', NULL, 1, NULL, 'MLM1', NULL, 0, 0, 0, 0, 0, 50, 150, 100, 1, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Paid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 1, NULL, 0, 'twoex'),
+(44, '0xcd596d19635540c3da9c9ab7f22157c1c0e76668', NULL, 1, NULL, 'MLM1', NULL, 200, 0, 0, 0, 0, 50, 150, 100, 1, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Paid', 'Block', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 1, NULL, 0, 'twoex'),
 (45, '0x8baac7c858bcee5ff59a7607c462f57a17878f01', NULL, 2, 'mlm49', 'MLM45', NULL, 0, 0, 0, 0, 0, 100, 300, 0, 2, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 400, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 4, NULL, 0, 'twoex'),
 (46, '0x8851fe7fefa4261da81457ffcf596ec49659e0b8', NULL, 3, 'mlm49', 'MLM46', NULL, 0, 0, 0, 0, 0, 250, 750, 165.501, 5, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 1, NULL, 68.9814, 'twoex'),
 (47, '0xde7ebbf403da52361e581903395fa5c7117045cb', NULL, 4, 'mlm49', 'MLM47', NULL, 0, 0, 0, 0, 0, 500, 1500, 231.001, 10, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 1, NULL, 137.963, 'twoex'),
@@ -1547,7 +1572,11 @@ INSERT INTO `user_registration` (`id`, `wallet_address`, `transaction_password`,
 (65, 'newtestuser7', NULL, 0, '', 'MLM65', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, 0, 'twoex'),
 (66, 'newtestuser7', NULL, 0, 'MLM59', 'MLM66', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, 0, 'twoex'),
 (67, 'newtestuser6', NULL, 0, 'mlm49', 'MLM67', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, 0, 'twoex'),
-(68, 'TMshLMuGQjpBW3HvyuCCgYM2tQ7CoQSyQv', NULL, 1, NULL, 'mlm68', NULL, 0, 0, 0, 0, 0, 50, 150, 0, 1, 0, 0, NULL, NULL, NULL, 0, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Pending', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 1, '2023-07-25', NULL, NULL, 1, NULL, 0, 'twoex');
+(68, 'TMshLMuGQjpBW3HvyuCCgYM2tQ7CoQSyQv', NULL, 1, NULL, 'mlm68', NULL, 0, 0, 0, 0, 0, 50, 150, 0, 1, 0, 0, NULL, NULL, NULL, 0, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Pending', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 1, '2023-07-25', NULL, NULL, 1, NULL, 0, 'twoex'),
+(69, 'newtestuser000', NULL, 0, '0', 'MLM69', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, 0, 'twoex'),
+(70, 'newtestuser6000', NULL, 0, '0', 'MLM70', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, 0, 'twoex'),
+(71, 'kkkk', NULL, 0, '0', 'MLM71', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, 0, 'twoex'),
+(72, 'newtestuser6000', NULL, 0, 'master', 'MLM72', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, NULL, NULL, 1, 1, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'user-profile.png', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Approved', 'Unpaid', 'Unblock', 'on', 'Verified', 0, 0, 0, 0, NULL, NULL, NULL, 0, NULL, 0, 'twoex');
 
 -- --------------------------------------------------------
 
@@ -1564,196 +1593,198 @@ CREATE TABLE `wallet_summary` (
   `type` varchar(255) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
   `gtron_wallet` float NOT NULL DEFAULT 0,
-  `credit_type` enum('pool_bonus','level_bonus') NOT NULL
+  `credit_type` enum('pool_bonus','level_bonus') NOT NULL,
+  `current_bonus_status` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `wallet_summary`
 --
 
-INSERT INTO `wallet_summary` (`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`) VALUES
-(1, 'MLM2', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-07-10 18:30:00', 0, 'level_bonus'),
-(2, 'MLM3', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(3, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(4, 'MLM3', 125, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(5, 'MLM2', 20, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(6, 'MLM4', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(7, 'MLM3', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(8, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(9, 'MLM6', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(10, 'MLM3', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(11, 'MLM2', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(12, 'MLM7', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(13, 'MLM2', 250, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(14, 'MLM9', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(15, 'MLM2', 4, 'Level 4 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(16, 'MLM10', 125, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(17, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(18, 'MLM12', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(19, 'MLM2', 3, 'Level 5 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(20, 'MLM13', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(21, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(22, 'MLM15', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(23, 'MLM2', 1, 'Level 6 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(24, 'MLM13', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(25, 'MLM2', 1, 'Level 6 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(26, 'MLM16', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(27, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(28, 'MLM18', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(29, 'MLM2', 10, 'Level 7 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(30, 'MLM19', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(31, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(32, 'MLM21', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(33, 'MLM2', 10, 'Level 8 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(34, 'MLM22', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(35, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(36, 'MLM24', 250, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(37, 'MLM2', 2.5, 'Level 9 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(38, 'MLM25', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(39, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(40, 'MLM27', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(41, 'MLM2', 0.5, 'Level 10 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(42, 'MLM3', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(43, 'MLM2', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(44, 'MLM4', 125, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(45, 'MLM3', 20, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(46, 'MLM2', 15, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(47, 'MLM7', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(48, 'MLM4', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(49, 'MLM3', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(50, 'MLM2', 4, 'Level 4 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(51, 'MLM10', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(52, 'MLM7', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(53, 'MLM4', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(54, 'MLM2', 3, 'Level 5 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(55, 'MLM3', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(56, 'MLM2', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(57, 'MLM13', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(58, 'MLM10', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(59, 'MLM2', 1, 'Level 6 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(60, 'MLM10', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(61, 'MLM7', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(62, 'MLM4', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(63, 'MLM3', 4, 'Level 4 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(64, 'MLM2', 3, 'Level 5 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(65, 'MLM1', 50, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(66, 'MLM2', 1000, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(67, 'MLM5', 100, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus'),
-(68, 'MLM10', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus'),
-(69, 'MLM7', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus'),
-(70, 'MLM4', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus'),
-(71, 'MLM3', 4, 'Level 4 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus'),
-(72, 'MLM2', 3, 'Level 5 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus'),
-(73, 'MLM2', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus'),
-(74, 'MLM13', 150, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus'),
-(75, 'MLM2', 20, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus'),
-(76, 'MLM2', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus'),
-(77, 'MLM2', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus'),
-(78, 'MLM1', 2, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus'),
-(79, 'MLM1', -49, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus'),
-(80, 'MLM1', -49, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus'),
-(81, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(82, 'MLM46', 25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 25, 'pool_bonus'),
-(83, 'MLM47', 50, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 50, 'pool_bonus'),
-(84, 'MLM48', 100, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 100, 'pool_bonus'),
-(85, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(86, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(87, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(88, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(89, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(90, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(91, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(92, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(93, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(94, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(95, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(96, 'MLM46', 12.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 12.5, 'pool_bonus'),
-(97, 'MLM47', 25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 25, 'pool_bonus'),
-(98, 'MLM48', 50, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 50, 'pool_bonus'),
-(99, 'mlm49', 2.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 2.5, 'pool_bonus'),
-(100, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(101, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(102, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(103, 'MLM46', 5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 5, 'pool_bonus'),
-(104, 'MLM47', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 10, 'pool_bonus'),
-(105, 'MLM48', 20, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 20, 'pool_bonus'),
-(106, 'mlm49', 1, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 1, 'pool_bonus'),
-(107, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(108, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(109, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(110, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(111, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(112, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(113, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(114, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(115, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(116, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(117, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(118, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(119, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(120, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(121, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(122, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(123, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(124, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(125, 'MLM46', 4.16667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 4.16667, 'pool_bonus'),
-(126, 'MLM47', 8.33333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 8.33333, 'pool_bonus'),
-(127, 'MLM48', 16.6667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 16.6667, 'pool_bonus'),
-(128, 'mlm49', 0.833333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0.833333, 'pool_bonus'),
-(129, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(130, 'MLM46', 6.25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 6.25, 'pool_bonus'),
-(131, 'MLM47', 12.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 12.5, 'pool_bonus'),
-(132, 'MLM48', 25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 25, 'pool_bonus'),
-(133, 'mlm49', 1.25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 1.25, 'pool_bonus'),
-(134, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(135, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(136, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus'),
-(137, 'MLM46', 2.77778, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 2.77778, 'pool_bonus'),
-(138, 'MLM47', 5.55556, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 5.55556, 'pool_bonus'),
-(139, 'MLM48', 11.1111, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 11.1111, 'pool_bonus'),
-(140, 'mlm49', 0.555556, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0.555556, 'pool_bonus'),
-(141, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0, 'pool_bonus'),
-(142, 'MLM46', 2.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 2.5, 'pool_bonus'),
-(143, 'MLM47', 5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 5, 'pool_bonus'),
-(144, 'MLM48', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 10, 'pool_bonus'),
-(145, 'mlm49', 0.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0.5, 'pool_bonus'),
-(146, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0, 'pool_bonus'),
-(147, 'MLM46', 2.27273, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 2.27273, 'pool_bonus'),
-(148, 'MLM47', 4.54545, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 4.54545, 'pool_bonus'),
-(149, 'MLM48', 9.09091, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 9.09091, 'pool_bonus'),
-(150, 'mlm49', 0.454545, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0.454545, 'pool_bonus'),
-(151, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0, 'pool_bonus'),
-(152, 'MLM46', 2.08333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 2.08333, 'pool_bonus'),
-(153, 'MLM47', 4.16667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 4.16667, 'pool_bonus'),
-(154, 'MLM48', 8.33333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 8.33333, 'pool_bonus'),
-(155, 'mlm49', 0.416667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0.416667, 'pool_bonus'),
-(156, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0, 'pool_bonus'),
-(157, 'MLM46', 3.57143, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 3.57143, 'pool_bonus'),
-(158, 'MLM47', 7.14286, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 7.14286, 'pool_bonus'),
-(159, 'MLM48', 14.2857, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 14.2857, 'pool_bonus'),
-(160, 'mlm49', 0.714286, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0.714286, 'pool_bonus'),
-(161, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus'),
-(162, 'MLM46', 1.66667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 1.66667, 'pool_bonus'),
-(163, 'MLM47', 3.33333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 3.33333, 'pool_bonus'),
-(164, 'MLM48', 6.66667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 6.66667, 'pool_bonus'),
-(165, 'mlm49', 0.333333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0.333333, 'pool_bonus'),
-(166, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus'),
-(167, 'MLM46', 1.5625, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 1.5625, 'pool_bonus'),
-(168, 'MLM47', 3.125, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 3.125, 'pool_bonus'),
-(169, 'MLM48', 6.25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 6.25, 'pool_bonus'),
-(170, 'mlm49', 0.3125, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0.3125, 'pool_bonus'),
-(171, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus'),
-(172, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus'),
-(173, 'MLM46', 1.47059, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 1.47059, 'pool_bonus'),
-(174, 'MLM47', 2.94118, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 2.94118, 'pool_bonus'),
-(175, 'MLM48', 5.88235, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 5.88235, 'pool_bonus'),
-(176, 'mlm49', 0.294118, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0.294118, 'pool_bonus'),
-(177, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus'),
-(178, 'MLM46', 1.38889, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 1.38889, 'pool_bonus'),
-(179, 'MLM47', 2.77778, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 2.77778, 'pool_bonus'),
-(180, 'MLM48', 5.55556, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 5.55556, 'pool_bonus'),
-(181, 'mlm49', 0.277778, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0.277778, 'pool_bonus'),
-(182, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus');
+INSERT INTO `wallet_summary` (`id`, `user_name`, `amount`, `description`, `wallet_type`, `type`, `date`, `gtron_wallet`, `credit_type`, `current_bonus_status`) VALUES
+(1, 'MLM2', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-07-10 18:30:00', 0, 'level_bonus', ''),
+(2, 'MLM3', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(3, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(4, 'MLM3', 125, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(5, 'MLM2', 20, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(6, 'MLM4', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(7, 'MLM3', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(8, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(9, 'MLM6', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(10, 'MLM3', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(11, 'MLM2', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(12, 'MLM7', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(13, 'MLM2', 250, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(14, 'MLM9', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(15, 'MLM2', 4, 'Level 4 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(16, 'MLM10', 125, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(17, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(18, 'MLM12', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(19, 'MLM2', 3, 'Level 5 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(20, 'MLM13', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(21, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(22, 'MLM15', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(23, 'MLM2', 1, 'Level 6 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(24, 'MLM13', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(25, 'MLM2', 1, 'Level 6 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(26, 'MLM16', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(27, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(28, 'MLM18', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(29, 'MLM2', 10, 'Level 7 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(30, 'MLM19', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(31, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(32, 'MLM21', 500, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(33, 'MLM2', 10, 'Level 8 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(34, 'MLM22', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(35, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(36, 'MLM24', 250, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(37, 'MLM2', 2.5, 'Level 9 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(38, 'MLM25', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(39, 'MLM2', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(40, 'MLM27', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(41, 'MLM2', 0.5, 'Level 10 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(42, 'MLM3', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(43, 'MLM2', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(44, 'MLM4', 125, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(45, 'MLM3', 20, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(46, 'MLM2', 15, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(47, 'MLM7', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(48, 'MLM4', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(49, 'MLM3', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(50, 'MLM2', 4, 'Level 4 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(51, 'MLM10', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(52, 'MLM7', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(53, 'MLM4', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(54, 'MLM2', 3, 'Level 5 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(55, 'MLM3', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(56, 'MLM2', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(57, 'MLM13', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(58, 'MLM10', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(59, 'MLM2', 1, 'Level 6 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(60, 'MLM10', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(61, 'MLM7', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(62, 'MLM4', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(63, 'MLM3', 4, 'Level 4 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(64, 'MLM2', 3, 'Level 5 Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(65, 'MLM1', 50, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(66, 'MLM2', 1000, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(67, 'MLM5', 100, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-06-24 18:30:00', 0, 'pool_bonus', ''),
+(68, 'MLM10', 50, 'Level 1 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus', ''),
+(69, 'MLM7', 8, 'Level 2 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus', ''),
+(70, 'MLM4', 6, 'Level 3 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus', ''),
+(71, 'MLM3', 4, 'Level 4 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus', ''),
+(72, 'MLM2', 3, 'Level 5 Bonus', 'Cash Wallet', 'Credit', '2023-06-30 18:30:00', 0, 'pool_bonus', ''),
+(73, 'MLM2', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus', ''),
+(74, 'MLM13', 150, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus', ''),
+(75, 'MLM2', 20, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus', ''),
+(76, 'MLM2', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus', ''),
+(77, 'MLM2', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus', ''),
+(78, 'MLM1', 2, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus', ''),
+(79, 'MLM1', -49, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus', ''),
+(80, 'MLM1', -49, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-01 18:30:00', 0, 'pool_bonus', ''),
+(81, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(82, 'MLM46', 25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 25, 'pool_bonus', ''),
+(83, 'MLM47', 50, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 50, 'pool_bonus', ''),
+(84, 'MLM48', 100, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 100, 'pool_bonus', ''),
+(85, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(86, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(87, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(88, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(89, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(90, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(91, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(92, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(93, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(94, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(95, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(96, 'MLM46', 12.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 12.5, 'pool_bonus', ''),
+(97, 'MLM47', 25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 25, 'pool_bonus', ''),
+(98, 'MLM48', 50, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 50, 'pool_bonus', ''),
+(99, 'mlm49', 2.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 2.5, 'pool_bonus', ''),
+(100, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(101, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(102, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(103, 'MLM46', 5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 5, 'pool_bonus', ''),
+(104, 'MLM47', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 10, 'pool_bonus', ''),
+(105, 'MLM48', 20, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 20, 'pool_bonus', ''),
+(106, 'mlm49', 1, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 1, 'pool_bonus', ''),
+(107, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(108, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(109, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(110, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(111, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(112, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(113, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(114, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(115, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(116, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(117, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(118, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(119, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(120, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(121, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(122, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(123, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(124, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(125, 'MLM46', 4.16667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 4.16667, 'pool_bonus', ''),
+(126, 'MLM47', 8.33333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 8.33333, 'pool_bonus', ''),
+(127, 'MLM48', 16.6667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 16.6667, 'pool_bonus', ''),
+(128, 'mlm49', 0.833333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0.833333, 'pool_bonus', ''),
+(129, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(130, 'MLM46', 6.25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 6.25, 'pool_bonus', ''),
+(131, 'MLM47', 12.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 12.5, 'pool_bonus', ''),
+(132, 'MLM48', 25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 25, 'pool_bonus', ''),
+(133, 'mlm49', 1.25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 1.25, 'pool_bonus', ''),
+(134, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(135, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(136, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0, 'pool_bonus', ''),
+(137, 'MLM46', 2.77778, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 2.77778, 'pool_bonus', ''),
+(138, 'MLM47', 5.55556, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 5.55556, 'pool_bonus', ''),
+(139, 'MLM48', 11.1111, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 11.1111, 'pool_bonus', ''),
+(140, 'mlm49', 0.555556, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-14 18:30:00', 0.555556, 'pool_bonus', ''),
+(141, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0, 'pool_bonus', ''),
+(142, 'MLM46', 2.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 2.5, 'pool_bonus', ''),
+(143, 'MLM47', 5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 5, 'pool_bonus', ''),
+(144, 'MLM48', 10, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 10, 'pool_bonus', ''),
+(145, 'mlm49', 0.5, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0.5, 'pool_bonus', ''),
+(146, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0, 'pool_bonus', ''),
+(147, 'MLM46', 2.27273, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 2.27273, 'pool_bonus', ''),
+(148, 'MLM47', 4.54545, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 4.54545, 'pool_bonus', ''),
+(149, 'MLM48', 9.09091, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 9.09091, 'pool_bonus', ''),
+(150, 'mlm49', 0.454545, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0.454545, 'pool_bonus', ''),
+(151, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0, 'pool_bonus', ''),
+(152, 'MLM46', 2.08333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 2.08333, 'pool_bonus', ''),
+(153, 'MLM47', 4.16667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 4.16667, 'pool_bonus', ''),
+(154, 'MLM48', 8.33333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 8.33333, 'pool_bonus', ''),
+(155, 'mlm49', 0.416667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0.416667, 'pool_bonus', ''),
+(156, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0, 'pool_bonus', ''),
+(157, 'MLM46', 3.57143, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 3.57143, 'pool_bonus', ''),
+(158, 'MLM47', 7.14286, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 7.14286, 'pool_bonus', ''),
+(159, 'MLM48', 14.2857, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 14.2857, 'pool_bonus', ''),
+(160, 'mlm49', 0.714286, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-16 18:30:00', 0.714286, 'pool_bonus', ''),
+(161, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus', ''),
+(162, 'MLM46', 1.66667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 1.66667, 'pool_bonus', ''),
+(163, 'MLM47', 3.33333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 3.33333, 'pool_bonus', ''),
+(164, 'MLM48', 6.66667, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 6.66667, 'pool_bonus', ''),
+(165, 'mlm49', 0.333333, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0.333333, 'pool_bonus', ''),
+(166, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus', ''),
+(167, 'MLM46', 1.5625, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 1.5625, 'pool_bonus', ''),
+(168, 'MLM47', 3.125, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 3.125, 'pool_bonus', ''),
+(169, 'MLM48', 6.25, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 6.25, 'pool_bonus', ''),
+(170, 'mlm49', 0.3125, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0.3125, 'pool_bonus', ''),
+(171, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus', ''),
+(172, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus', ''),
+(173, 'MLM46', 1.47059, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 1.47059, 'pool_bonus', ''),
+(174, 'MLM47', 2.94118, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 2.94118, 'pool_bonus', ''),
+(175, 'MLM48', 5.88235, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 5.88235, 'pool_bonus', ''),
+(176, 'mlm49', 0.294118, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0.294118, 'pool_bonus', ''),
+(177, 'MLM1', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus', ''),
+(178, 'MLM46', 1.38889, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 1.38889, 'pool_bonus', ''),
+(179, 'MLM47', 2.77778, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 2.77778, 'pool_bonus', ''),
+(180, 'MLM48', 5.55556, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 5.55556, 'pool_bonus', ''),
+(181, 'mlm49', 0.277778, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0.277778, 'pool_bonus', ''),
+(182, 'mlm49', 0, 'Pool Bonus', 'Cash Wallet', 'Credit', '2023-07-18 18:30:00', 0, 'pool_bonus', ''),
+(183, 'MLM1', 200, 'Credit By Admin', 'Cash Wallet', 'Credit', '2023-08-10 09:26:16', 0, 'pool_bonus', '');
 
 -- --------------------------------------------------------
 
@@ -1993,6 +2024,12 @@ ALTER TABLE `package`
 ALTER TABLE `package_details`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `trans_id` (`trans_id`);
+
+--
+-- Indexes for table `package_old`
+--
+ALTER TABLE `package_old`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `package_percentage`
@@ -2292,13 +2329,19 @@ ALTER TABLE `old_share`
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `package_details`
 --
 ALTER TABLE `package_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+
+--
+-- AUTO_INCREMENT for table `package_old`
+--
+ALTER TABLE `package_old`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `package_percentage`
@@ -2340,7 +2383,7 @@ ALTER TABLE `pool_share_credit_history`
 -- AUTO_INCREMENT for table `pre_registration`
 --
 ALTER TABLE `pre_registration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -2424,13 +2467,13 @@ ALTER TABLE `user_pool_amount_history`
 -- AUTO_INCREMENT for table `user_registration`
 --
 ALTER TABLE `user_registration`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `wallet_summary`
 --
 ALTER TABLE `wallet_summary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT for table `wallet_transfer`
