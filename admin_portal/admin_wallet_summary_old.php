@@ -185,7 +185,7 @@ $(document).ready(function() {
     $(".sendOtpEmail").click(function(){
         let sendMail = 'Email Send';
         let owner = document.getElementById('owner').value;
-        let email = document.getElementById('admin-mail').value;
+        let email = document.getElementById('email-id').value;
         $(".sendOtpEmail").prop('disabled', true);
         $(".sendOtpEmail").text('Processing');
         $.post("./ajax/otp_generator.php",{otp_send:sendMail, owner:owner, email:email}).done(function (feedback) {
@@ -209,7 +209,7 @@ $(document).ready(function() {
     $(".confirmOtp").click(function(){
         var userInptOTP = document.getElementById('otp-value').value;
         let owner = document.getElementById('owner').value;
-        let email = document.getElementById('admin-mail').value;
+        let email = document.getElementById('email-id').value;
         if(userInptOTP == ''){
             alert("please enter valid otp");
             return;
@@ -238,8 +238,7 @@ $(document).ready(function() {
         let walletAddress = document.getElementById("wallet-address").value;
         $("#withdrawal-btn").prop('disabled', true);
         $("#withdrawal-btn").text('Processing');
-        //$.post("./ajax/ajax_tronwallet.php",{gtronAmount:gtronAmount,walletAddress:walletAddress}).done(function (feedback) {
-        $.post("./ajax/broadcast_transaction.php",{gtronAmount:gtronAmount,walletAddress:walletAddress}).done(function (feedback) {
+        $.post("./ajax/ajax_tronwallet.php",{gtronAmount:gtronAmount,walletAddress:walletAddress}).done(function (feedback) {
             if(feedback == 'failed') {
                 $('.withdrawalSuccessMessage').text('');
                 $('.withdrawalErrorMessage').text(feedback);
