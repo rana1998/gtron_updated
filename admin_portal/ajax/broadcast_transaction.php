@@ -62,43 +62,43 @@ if ($err) {
     print_r($signedTransaction);
 
     // // Broadcast the signed transaction using cURL
-    // $curl = curl_init();
-    // curl_setopt_array($curl, [
-    //     CURLOPT_URL => "{$apiEndpoint}/wallet/broadcasttransaction",
-    //     CURLOPT_RETURNTRANSFER => true,
-    //     CURLOPT_ENCODING => "",
-    //     CURLOPT_MAXREDIRS => 10,
-    //     CURLOPT_TIMEOUT => 30,
-    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //     CURLOPT_CUSTOMREQUEST => "POST",
-    //     CURLOPT_POSTFIELDS => json_encode($signedTransaction),
-    //     CURLOPT_HTTPHEADER => [
-    //         "accept: application/json",
-    //         "content-type: application/json"
-    //     ],
-    // ]);
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+        CURLOPT_URL => "{$apiEndpoint}/wallet/broadcasttransaction",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($signedTransaction),
+        CURLOPT_HTTPHEADER => [
+            "accept: application/json",
+            "content-type: application/json"
+        ],
+    ]);
 
-    // $broadcastResponse = curl_exec($curl);
-    // var_dump($broadcastResponse); // or print_r($broadcastResponse);
+    $broadcastResponse = curl_exec($curl);
+    var_dump($broadcastResponse); // or print_r($broadcastResponse);
 
-    // $err = curl_error($curl);
-    // curl_close($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
 
-    // if ($err) {
-    //     echo "Broadcasting Error: " . $err;
-    // } else {
-    //     // Process the broadcast response
-    //     $broadcastResponse = json_decode($broadcastResponse, true);
-    //     if (isset($broadcastResponse['result']) && $broadcastResponse['result']) {
-    //         echo "Transaction Broadcasted Successfully. TXID: " . $broadcastResponse['txid'];
-    //     } else {
-    //         if (isset($broadcastResponse['error']) && isset($broadcastResponse['error']['message'])) {
-    //             echo "Broadcasting Failed. Error: " . $broadcastResponse['error']['message'];
-    //         } else {
-    //             echo "Broadcasting Failed. Unknown Error.";
-    //         }
-    //     }
-    // }
+    if ($err) {
+        echo "Broadcasting Error: " . $err;
+    } else {
+        // Process the broadcast response
+        $broadcastResponse = json_decode($broadcastResponse, true);
+        if (isset($broadcastResponse['result']) && $broadcastResponse['result']) {
+            echo "Transaction Broadcasted Successfully. TXID: " . $broadcastResponse['txid'];
+        } else {
+            if (isset($broadcastResponse['error']) && isset($broadcastResponse['error']['message'])) {
+                echo "Broadcasting Failed. Error: " . $broadcastResponse['error']['message'];
+            } else {
+                echo "Broadcasting Failed. Unknown Error.";
+            }
+        }
+    }
 }
 
 
