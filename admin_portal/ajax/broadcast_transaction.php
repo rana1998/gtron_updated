@@ -5,15 +5,16 @@ ini_set('display_errors', 1);
 
 session_start();
 
-if(isset($_SESSION['isOTPmatch']) && $_SESSION['isOTPmatch'] == true) {
+// if(isset($_SESSION['isOTPmatch']) && $_SESSION['isOTPmatch'] == true) {
 
-    unset($_SESSION['isOTPmatch']);
+    // unset($_SESSION['isOTPmatch']);
 
-    $receiverWalletAddress = $_POST['walletAddress'];
-    $gtronAmount = (float)$_POST['gtronAmount'];
+    //"Production "
+    // $receiverWalletAddress = $_POST['walletAddress'];
+    // $gtronAmount = (float)$_POST['gtronAmount'];
 
     // Sample receiver wallet address and amount
-    // $receiverWalletAddress = "TPHyyDRvbT3LgoSmqWTHVuMUBeZB45jKvk";
+    $receiverWalletAddress = "TPHyyDRvbT3LgoSmqWTHVuMUBeZB45jKvk";
     $ownerAddress = "TMshLMuGQjpBW3HvyuCCgYM2tQ7CoQSyQv"; //"Development purpose"
     $gtronAmount = 100;
 
@@ -30,7 +31,10 @@ if(isset($_SESSION['isOTPmatch']) && $_SESSION['isOTPmatch'] == true) {
         'owner_address' => $ownerAddress,
         'amount' => $gtronAmount,
         'visible' => true
-    ];
+    ];    
+
+    // print_r($transactionData);
+    // exit();
 
     // Create the transaction using cURL
     $curl = curl_init();
@@ -59,6 +63,9 @@ if(isset($_SESSION['isOTPmatch']) && $_SESSION['isOTPmatch'] == true) {
         // Decode the transaction data
         $transaction = json_decode($response, true);
 
+        // print_r($transaction);
+        // exit();
+
         // Sign the transaction using the provided private key
         $signedTransaction = [
             'transaction' => $transaction,
@@ -66,6 +73,7 @@ if(isset($_SESSION['isOTPmatch']) && $_SESSION['isOTPmatch'] == true) {
         ];
 
         // print_r($signedTransaction);
+        // exit();
 
         // // Broadcast the signed transaction using cURL
         $curl = curl_init();
@@ -108,8 +116,8 @@ if(isset($_SESSION['isOTPmatch']) && $_SESSION['isOTPmatch'] == true) {
         }
     }
 
-} else {
-    echo "failed";
-}
+// } else {
+//     echo "failed";
+// }
 
 ?>
