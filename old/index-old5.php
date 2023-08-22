@@ -1224,15 +1224,15 @@ if(isset($_POST["submit"])){
 
                 <option value="">Select Package</option>
 
-                <option value="50 USDT">$50 USDT</option>
+                <option value="50 usdt">$50 usdt</option>
 
-                <option value="100 USDT">$100 USDT</option>
+                <option value="100 usdt">$100 usdt</option>
 
-                <option value="250 USDT">$250 USDT</option>
+                <option value="250 usdt">$250 usdt</option>
 
-                <option value="500 USDT">$500 USDT</option>
+                <option value="500 usdt">$500 usdt</option>
 
-                <option value="1000 USDT">$1000 USDT</option>
+                <option value="1000 usdt">$1000 usdt</option>
 
                 <!-- Add more plans here -->
 
@@ -1540,15 +1540,15 @@ their wealth through referrals, bonus distribution, and reinvestments.</p>
 
         
 
-          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$50 USDT</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
+          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$50 usdt</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
 
-          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$100 USDT</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
+          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$100 usdt</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
 
-          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$250 USDT</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
+          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$250 usdt</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
 
-          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$500 USDT</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
+          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$500 usdt</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
 
-          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$1000 USDT</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
+          <div class="package_div"><p><img src="assets/images/icons/box.svg" class="box">$1000 usdt</p><button class="btn-main" onclick="handleButtonClick(event)"><img src="assets/images/icons/wallet.svg">Connect Wallet</button></div>
 
 
 
@@ -1666,21 +1666,21 @@ their wealth through referrals, bonus distribution, and reinvestments.</p>
 
                <p class="white_p">2 Direct Referrals</p>
 
-               <p class="white_p">3 Direct Referrals</p>
+               <p class="white_p">2 Direct Referrals</p>
 
-               <p class="white_p">4 Direct Referrals</p>
+               <p class="white_p">2 Direct Referrals</p>
 
-               <p class="white_p">5 Direct Referrals</p>
+               <p class="white_p">2 Direct Referrals</p>
 
-               <p class="white_p">6 Direct Referrals</p>
+               <p class="white_p">2 Direct Referrals</p>
 
-               <p class="white_p">7 Direct Referrals</p>
+               <p class="white_p">2 Direct Referrals</p>
 
-               <p class="white_p">8 Direct Referrals</p>
+               <p class="white_p">2 Direct Referrals</p>
 
-               <p class="white_p">9 Direct Referrals</p>
+               <p class="white_p">2 Direct Referrals</p>
 
-               <p class="white_p">10 Direct Referrals</p>
+               <p class="white_p">2 Direct Referrals</p>
 
             </div>
 
@@ -2137,7 +2137,7 @@ Bonuses and incentives: Gtron may offer bonuses and incentives based on your per
 
          <h2>SMART - CONTRACT :</h2>
 
-         <p><a href="https://bscscan.com/address/0x8a338ef0c3895a06319e8f2f76526edd25e24905" target="_blank">0x8a338ef0c3895a06319e8f2f76526edd25e24905</a></p>
+         <p>TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t</p>
 
       </div>
 
