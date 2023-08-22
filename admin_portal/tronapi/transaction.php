@@ -23,6 +23,8 @@ $transactionData = [
 // $signedTransaction = signTransaction($transactionData, $privateKey);
 $signedTransaction = signTransaction($transactionData, $privateKey, $senderAddress);
 
+// print_r($signedTransaction);
+
 // Prepare the API request
 $response = $client->post("$apiEndpoint/wallet/createtransaction", [
     'json' => $signedTransaction,
@@ -68,8 +70,12 @@ function signTransaction($transactionData, $privateKey, $senderAddress) {
         'json' => $transaction,
     ]);
 
+    print_r(json_decode($response->getBody(), true));
+
     if ($response->getStatusCode() === 200) {
         $responseData = json_decode($response->getBody(), true);
+
+        // print_r($responseData);
         
         // Sign the transaction
         $signedTransaction = [
@@ -82,26 +88,6 @@ function signTransaction($transactionData, $privateKey, $senderAddress) {
         throw new Exception('Error creating transaction.');
     }
 }
-
-// // Function to sign the transaction using TronWeb
-// function signTransaction($transactionData, $privateKey) {
-//     // Use TronWeb library to sign the transaction
-//     $tronWeb = new \IEXBase\TronAPI\Tron();
-//     $tronWeb->setPrivateKey($privateKey);
-    
-//     // Construct the transaction
-//     $transaction = $tronWeb->transactionBuilder->sendTrx(
-//         $transactionData['to'],
-//         $transactionData['amount'],
-//         $senderAddress
-//     );
-    
-//     // Sign the transaction
-//     $signedTransaction = $tronWeb->signTransaction($transaction);
-    
-//     return $signedTransaction;
-// }
-
 
 
 

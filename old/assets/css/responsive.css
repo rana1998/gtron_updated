@@ -1,0 +1,509 @@
+ @media (max-width: 650px) {          /*---------------MOBILEs-----------------*/
+
+
+
+.navbar{
+    padding: 1rem 2rem 1rem 2rem;
+    z-index: 9999;
+}
+
+.navbar .nav-logo{
+    width: 6rem;
+}
+
+
+
+.navbar .nav-link{
+font-size: 0.9rem;
+margin-left: 1.5vw;
+margin-top: 0.5rem;
+}
+
+.navbar .nav-link .slant{
+   display: none;
+}
+
+
+.navbar .connect-btn{
+padding: 0.6rem 2.5rem;
+font-size: 1rem;
+color: #ffffff;
+border-radius: 1.5rem;
+}
+
+
+.navbar .connect-btn img{
+    width: 1rem;
+    margin-right: 0.8rem;
+}
+
+.navbar .earth-btn{
+    padding: 0.6rem;
+    margin-left: 1rem;
+    border-radius: 50%;
+}
+
+.navbar .earth-btn img{
+    width: 1.2rem;
+}
+
+
+#banner{
+    padding: 0vw 1rem;
+}
+
+
+#banner_slider .item h2{
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.3vw;
+}
+
+#banner_slider .item h1{
+    font-size: 2rem;
+    line-height: 2rem;
+    margin-top: 1rem;
+}
+
+
+
+#banner_slider .item h3{
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-top: 1rem;
+}
+
+
+#banner_slider .item .robot{
+    position: absolute;
+    z-index: -2;
+    width: 14rem;
+    right: -0rem;
+    top: -2rem;
+}
+
+#banner_slider .item .my-previous-button img{
+    width: 2.5rem;
+}
+
+
+#banner_slider .item .my-next-button img{
+    width: 2.5rem;
+}
+
+
+#banner_slider .item hr{
+    border-top: 2px solid #3e1f67;
+    margin-top: 1rem;
+}
+
+
+#Why{
+    padding: 4rem 1rem 1rem 1rem;
+    position: relative;
+}
+
+#Why h2{
+    font-size: 0.8rem;
+    letter-spacing: 0.3vw;
+}
+
+
+#Why h1{
+    font-size: 2rem;
+    margin-top: -0.5rem;
+}
+
+#Why .why_underline{
+    width: 14rem;
+    margin-top: -1rem;
+}
+
+#Why .col-md-4{
+    text-align: center;
+}
+
+
+#Why .icon{
+    margin-top: 1rem;
+    width: 2rem;
+}
+
+
+#Why h3{
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+#Why p{
+    font-size: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+
+#welcome{
+    padding: 1rem 1rem 1rem 1rem;
+    position: relative;
+}
+
+#welcome .wel-icon{
+ width: 15rem;
+ text-align: center;
+}
+
+#welcome p{
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+}
+
+
+#welcome .btn-row button{
+   margin-top: 1.5rem;
+   font-size: 1rem;
+   padding: 0.6vw 3vw 0.6vw 1vw;
+   width: 90%;
+   border-radius: 3rem;
+
+}
+
+#welcome .btn-row button img{
+   width: 2rem;
+   margin-right: 1rem;
+}
+
+
+#packages{
+    padding: 2rem 1rem 2rem 1rem;
+    position: relative;
+}
+
+#packages .packages_bg{
+    display: none;
+}
+
+
+#packages h1{
+    font-size: 2rem;
+    margin-top: -0.5rem;
+}
+
+#packages .package_underline{
+    width: 8rem;
+    margin-top: -1rem;
+}
+
+#packages .package_row{
+padding-top: 1rem;
+}
+
+#packages h2{
+    font-size: 0.8rem;
+    letter-spacing: 0.3vw;
+}
+
+#packages .float-right{
+    margin-top: -1.5rem;
+}
+
+#packages .package_div{
+    margin-top: 1rem;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.1rem;
+    border-radius: 3rem;
+}
+
+#packages .package_div .box{
+    width: 1.2rem;
+    margin-right: 1rem;
+}
+
+#packages .package_div p{
+    font-size: 1rem;
+}
+
+
+#packages .package_div button{
+    margin-top: -3rem;
+    font-size: 1rem;
+    padding: 0.6rem 2rem 0.6rem 2rem;
+    border-radius: 3rem;
+}
+
+
+#packages .package_div button img{
+    width: 1rem;
+    margin-right: 1rem;
+}
+
+
+
+#level{
+    padding: 2rem 1rem;
+    position: relative;
+}
+
+
+#level h2{
+    font-size: 0.8rem;
+}
+
+#level h1{
+    font-size: 2rem;
+    margin-top: -1vw;
+}
+
+#level h3{
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+
+
+#level .left h2{
+    font-size: 0.6rem;
+    letter-spacing: 0.3rem;
+    margin-top: 2rem;
+}
+
+#level .left hr{
+    margin-bottom: 2rem;
+}
+
+#level .left p{
+    font-size: 0.6rem;
+}
+
+
+
+#level .right .bonus_div .top{
+    padding: 1rem;
+}
+
+#level .right .bonus_div .bottom{
+    padding: 1rem;
+}
+
+
+#level .right .bonus_div .bottom p{
+    padding-left: 2rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+}
+
+#level .right .bonus_div .bottom p .dash{
+    width: 1rem;
+    left: 0vw;
+    top: 0.5rem;
+}
+
+
+
+#gtron{
+    padding: 2rem 1rem 4rem 1rem;
+    position: relative;
+}
+
+
+#gtron h1{
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+#gtron p{
+font-size: 0.8rem;
+}
+
+#gtron .coins{
+    width: 50%;
+}
+
+
+
+#faqs{
+    padding: 3rem 1rem 3rem 1rem;
+}
+
+
+#faqs h1{
+    font-size: 2rem;
+}
+
+#faqs .faq_line{
+    margin-bottom: 2rem;
+    width: 10rem;
+}
+
+
+#accordion .card{
+    margin-bottom: 1rem;
+    border-radius: 3rem;
+}
+
+
+#accordion .card .card-header{
+    border-radius: 3rem;
+    padding-left: 1rem;
+    text-align: left;
+}
+
+#accordion .card .card-header button{
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+
+#accordion .card .card-body{
+    padding: 2rem;
+    font-size: 0.8rem;
+}
+
+
+#ready{
+    padding: 2rem 4rem 2rem 4rem;
+}
+
+
+#ready .left{
+    padding: 2rem;
+    background: #140932;
+    border-radius: 1rem 1rem 1rem 1rem;
+} 
+
+
+#ready .left h2{
+    font-size: 0.8rem;
+    letter-spacing: 0.3rem;
+}
+
+#ready .left h3{
+    font-size: 2rem;
+}
+
+#ready .left h1{
+    font-size: 2.5rem;
+    margin-top: -1rem;
+}
+
+
+#ready .left p{
+    font-size: 0.8rem;
+}
+
+
+#ready .right{
+border-radius: 1rem;
+padding: 2rem;
+}
+
+#ready .right .get_started{
+  transform: translate(-50%, -50%);
+  padding: 0.5rem 3rem;
+  font-size: 0.8rem;
+  border-radius: 3rem;
+  width: 80%;
+}
+
+
+#smart{
+    padding: 0vw 1rem 0vw 1rem;
+}
+
+#smart hr{
+    margin-top: 2rem;
+}
+
+#smart h2{
+    font-size: 0.8rem;
+    letter-spacing: 0.3rem;  
+    margin-top: 2vw;
+}
+
+
+#smart p,a{
+ font-size: 0.8rem;
+}
+
+
+footer{
+    padding: 2rem 1rem 2rem 1rem;
+}
+
+footer .logo{
+    width: 6rem;
+}
+
+
+footer p{
+    font-size: 0.8rem;
+    margin-top: 2rem;
+    padding-right: 2rem;
+}
+
+
+footer a{
+font-family: 'circularstd-medium', serif;   
+font-size: 0.8rem;
+padding-bottom: 2vw;
+}
+
+footer ul .foot-link{
+    padding-bottom: 1rem;
+    padding-left: 0rem;
+}
+
+
+footer h2{
+    font-size: 1rem !important;
+    letter-spacing: 0.3rem;  
+}
+
+footer .icon img{
+    width: 2rem;
+    margin-top: 1rem;
+    margin-right: 1.5rem;
+}
+
+
+
+ }
+
+
+
+
+  @media (max-width: 900px)  /*-----------TABLETS--------------*/
+  and (min-width: 700px){
+   
+  
+
+
+
+  }
+
+
+
+
+
+
+
+  @media (max-width: 1300px)  /*-----------13/10 inch laptop--------------*/
+  and (min-width: 900px){
+   
+  
+
+
+
+  }
+
+
+
+
+
+
+  @media (max-width: 1930px)  /*-----------23/24 inch laptop--------------*/
+  and (min-width: 1820px){
+
+
+
+  }  
