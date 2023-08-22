@@ -1804,7 +1804,7 @@ they will be getting upto  3x i.e 300 USDT from the Dividend Pool</p>
 
       <div class="col-md-6">
 
-         <h1>GTRON <span>COIN</span></h1>
+         <h1>GTRON <span>TOKEN</span></h1>
         <P>
          Decentralization: Gtron operates on the BEP-20 standard, ensuring compatibility with the BSC network. This decentralized structure empowers users by eliminating the need for intermediaries and promoting peer-to-peer transactions.
         </P>
