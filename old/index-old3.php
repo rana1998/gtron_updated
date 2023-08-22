@@ -1742,53 +1742,7 @@ they will be getting upto  3x i.e 300 USDT from the Dividend Pool</p>
 
 
 
-<section id="performance">
-   
-   <div class="row">
-      <div class="col-md-3">
-         <h2>Performance <span>Bonus</span></h2>
-      </div>
-      <div class="col-md-9">
-         <hr/>
-      </div>
-   </div>
 
-   <div class="inner">
-      <h3>Referral-Performance bonus</h3>
-      <div class="row">
-         <div class="col-md-6">
-            <div class="row">
-               <div class="col-md-4 col-4">
-                  <p class="blue-txt">Level 1</p>
-                  <p class="blue-txt">Level 2</p>
-                  <p class="blue-txt mr-top">Level 3</p>
-               </div>
-               <div class="col-md-8 col-8">
-                  <p>(5 Direct)</p>
-                  <p>(25 Referral)<br>-100 USDT + 1000 GTC</p>
-                  <p>(125 Referral)<br>-200 USDT + 20000 GTC</p>
-               </div>
-            </div>
-         </div>
-         <div class="col-md-6">
-            <div class="row">
-               <div class="col-md-4 col-4">
-                  <p class="blue-txt">Level 1</p>
-                  <p class="blue-txt">Level 2</p>
-                  <p class="blue-txt mr-top">Level 3</p>
-               </div>
-               <div class="col-md-8 col-8">
-                  <p>(10 Direct)</p>
-                  <p>(100 Referral)<br>-200 USDT + 20000 GTC</p>
-                  <p>(1000 Referral)<br>-2250 USDT + 2255000 GTC</p>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   
-
-</section>
 
 
 
@@ -2278,7 +2232,6 @@ Bonuses and incentives: Gtron may offer bonuses and incentives based on your per
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>
 

@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 include_once("template-parts/footer.php");
 
 include_once("template-parts/header_links.php");
@@ -1297,7 +1297,7 @@ if(isset($_POST["submit"])){
 
 
       <h2>GET STARTED</h2>
-
+      
       <h1>WEB3 POWERED<br>DECENTRALIZED<br>CRYPTO ECOSYSTEM</h1>
 
       <h3>TO MULTIPLY<br>YOUR WEALTH</h3>
@@ -1742,53 +1742,7 @@ they will be getting upto  3x i.e 300 USDT from the Dividend Pool</p>
 
 
 
-<section id="performance">
-   
-   <div class="row">
-      <div class="col-md-3">
-         <h2>Performance <span>Bonus</span></h2>
-      </div>
-      <div class="col-md-9">
-         <hr/>
-      </div>
-   </div>
 
-   <div class="inner">
-      <h3>Referral-Performance bonus</h3>
-      <div class="row">
-         <div class="col-md-6">
-            <div class="row">
-               <div class="col-md-4 col-4">
-                  <p class="blue-txt">Level 1</p>
-                  <p class="blue-txt">Level 2</p>
-                  <p class="blue-txt mr-top">Level 3</p>
-               </div>
-               <div class="col-md-8 col-8">
-                  <p>(5 Direct)</p>
-                  <p>(25 Referral)<br>-100 USDT + 1000 GTC</p>
-                  <p>(125 Referral)<br>-200 USDT + 20000 GTC</p>
-               </div>
-            </div>
-         </div>
-         <div class="col-md-6">
-            <div class="row">
-               <div class="col-md-4 col-4">
-                  <p class="blue-txt">Level 1</p>
-                  <p class="blue-txt">Level 2</p>
-                  <p class="blue-txt mr-top">Level 3</p>
-               </div>
-               <div class="col-md-8 col-8">
-                  <p>(10 Direct)</p>
-                  <p>(100 Referral)<br>-200 USDT + 20000 GTC</p>
-                  <p>(1000 Referral)<br>-2250 USDT + 2255000 GTC</p>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   
-
-</section>
 
 
 
@@ -1805,14 +1759,8 @@ they will be getting upto  3x i.e 300 USDT from the Dividend Pool</p>
       <div class="col-md-6">
 
          <h1>GTRON <span>COIN</span></h1>
-        <P>
-         Decentralization: Gtron operates on the BEP-20 standard, ensuring compatibility with the BSC network. This decentralized structure empowers users by eliminating the need for intermediaries and promoting peer-to-peer transactions.
-        </P>
-        <P>
-Utility and Use Cases: Gtron isn't just a token; it's a utility within a thriving ecosystem. Holders can access a range of services, such as decentralized applications (dApps), staking, yield farming, and more. Gtron's real-world use cases extend its value beyond the realm of speculative trading.
-</p>
 
-         <!-- <p>Are you ready to step into the exciting world of cryptocurrency? 
+         <p>Are you ready to step into the exciting world of cryptocurrency? 
 
 Look no further than <span>GTRON Coin,</span></p> 
 
@@ -1826,7 +1774,7 @@ the way we transact and empower individuals across the globe.</p>
 
 <p>With its innovative features and robust technology, 
 
-<span>GTRON Coin</span> is set to redefine the future of finance.</p> -->
+<span>GTRON Coin</span> is set to redefine the future of finance.</p>
 
       </div>
 
@@ -2278,7 +2226,6 @@ Bonuses and incentives: Gtron may offer bonuses and incentives based on your per
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>
 

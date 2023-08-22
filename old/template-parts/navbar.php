@@ -103,6 +103,9 @@ button.btnconnect {
     flex: 1;
 }
 
+.modal {
+  padding-top:0px;
+}
 .modal-top {
     display: flex;
     flex-direction: row;
@@ -111,7 +114,7 @@ button.btnconnect {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 10% auto;
+    margin: 2% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
