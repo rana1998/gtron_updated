@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once("template-parts/footer.php");
 
 include_once("template-parts/header_links.php");
@@ -1297,7 +1297,7 @@ if(isset($_POST["submit"])){
 
 
       <h2>GET STARTED</h2>
-      
+
       <h1>WEB3 POWERED<br>DECENTRALIZED<br>CRYPTO ECOSYSTEM</h1>
 
       <h3>TO MULTIPLY<br>YOUR WEALTH</h3>

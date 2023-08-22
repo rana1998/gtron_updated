@@ -153,6 +153,9 @@ button.btnconnect {
     <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
 
+    <script type="text/javascript" src="main.js"></script>
+
+
 <script>
   function connectWithTronlink(reff) {
 
@@ -255,6 +258,7 @@ function handleButtonClick(event) {
       modal.style.display = "block";
       return;
     }
+    
 </script>
 
 
