@@ -75,6 +75,42 @@ if(isset($_POST['update'])){
             // Use $row to access individual column values
             // For example: $userReferralID = $row['user_referral_id'];
              $parent_id = $row['id'];
+
+            // Prepare the SQL query
+            $select = "SELECT COUNT(*) AS descendant_count FROM user_hierarchy WHERE parent_user_id = '$parent_id'";
+
+            // Execute the query
+            $result = mysqli_query($con, $select);
+
+            if ($result) {
+                // Fetch the result
+                $row = mysqli_fetch_assoc($result);
+                
+                // Get the descendant count
+                $descendant_count = $row['descendant_count'];
+                
+                // Use the descendant count as needed
+                // echo "Descendant count: " . $descendant_count;
+                if($descendant_count >= 5) {
+                    $_SESSION['errorMsg'] = "only 5 direct user allowed.";
+                    header("Location: user_level_distribution.php");
+                    exit();
+                }
+            } else {
+                // Handle query error
+                // echo "Error executing query: " . mysqli_error($con);
+                $_SESSION['errorMsg'] = "Error executing query: " . mysqli_error($con);
+                header("Location: user_level_distribution.php");
+                exit();
+            }
+
+            if($descendant_count >= 5) {
+                $_SESSION['errorMsg'] = "only 5 directuser allowed.";
+                header("Location: user_level_distribution.php");
+                exit();
+                // return;
+            }
+
             } else {
             // No matching row found
             // echo "No matching row found.";

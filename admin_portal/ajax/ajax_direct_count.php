@@ -14,7 +14,9 @@ try {
     // Start with the root user's ID
     $user_ids_to_check = [$root_user_id];
 
+    $count = 0;
     while (!empty($user_ids_to_check)) {
+        // print_r($user_ids_to_check);
         $current_user_id = array_shift($user_ids_to_check);
 
         // Fetch descendants for the current user
