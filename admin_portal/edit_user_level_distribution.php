@@ -1,5 +1,7 @@
 <?php
 	include "header.php";
+    require_once('core/config.php');
+    $pdo = getDB();   
     // exit();
 // Getting user details from user_registration table 
 	if(isset($_GET['id']) && $_GET['id'] != ''){
@@ -60,6 +62,8 @@ if(isset($_POST['update'])){
         $level = $_POST['level'];
         $parent_id = 0;
 
+        $direct5Flag = 1;
+
         //To parent 
         if($referrer_user_id != '') {
             $query = "SELECT *
@@ -72,53 +76,77 @@ if(isset($_POST['update'])){
             if ($result) {
             $row = mysqli_fetch_assoc($result);
             if ($row) {
-            // Use $row to access individual column values
-            // For example: $userReferralID = $row['user_referral_id'];
-             $parent_id = $row['id'];
+                // Use $row to access individual column values
+                // For example: $userReferralID = $row['user_referral_id'];
+                $parent_id = $row['id'];
 
-            // Prepare the SQL query
-            $select = "SELECT COUNT(*) AS descendant_count FROM user_hierarchy WHERE parent_user_id = '$parent_id'";
+                // Prepare the SQL query
+                $select = "SELECT COUNT(*) AS descendant_count FROM user_hierarchy WHERE parent_user_id = '$parent_id'";
 
-            // Execute the query
-            $result = mysqli_query($con, $select);
+                // Execute the query
+                $result = mysqli_query($con, $select);
 
-            if ($result) {
-                // Fetch the result
-                $row = mysqli_fetch_assoc($result);
-                
-                // Get the descendant count
-                $descendant_count = $row['descendant_count'];
-                
-                // Use the descendant count as needed
-                // echo "Descendant count: " . $descendant_count;
-                if($descendant_count >= 5) {
-                    $_SESSION['errorMsg'] = "only 5 direct user allowed.";
-                    header("Location: user_level_distribution.php");
-                    exit();
+                    if ($result) {
+                        // Fetch the result
+                        $row = mysqli_fetch_assoc($result);
+                        
+                        // Get the descendant count
+                        $descendant_count = $row['descendant_count'];
+
+                        $selectQuery = "SELECT COUNT(*) FROM user_direct_ref_count WHERE user_id = ?";
+
+                        $stmtSelect = $pdo->prepare($selectQuery);
+                        $stmtSelect->execute([$parent_id]);
+
+                        $rowCount = $stmtSelect->fetchColumn();
+
+                        if ($rowCount > 0) {
+                            
+                            // echo "User with user_id $userIdToCheck exists in the table.";
+                        } else {
+                            // echo "User with user_id $userIdToCheck does not exist in the table.";
+                            $direct5Flag = 1;
+                            $insert_direct_ref_flag_query = "INSERT INTO user_direct_ref_count (`user_id`, `is_direct_five_ref`) VALUES ('$parent_id', '$direct5Flag')";
+                            $stmt = $pdo->prepare($insert_direct_ref_flag_query);
+                            $stmt->execute();
+                        }
+                        
+                        if($descendant_count >= 10) {
+                            $_SESSION['errorMsg'] = "only 10 direct user allowed.";
+                            header("Location: user_level_distribution.php");
+                            exit();
+                        }
+                        // Use the descendant count as needed
+                        if($descendant_count > 5 && $descendant_count <= 10) {
+                            $newDirect5Flag = 0; // Replace with the new is_direct_five_ref value
+                            $updateQuery = "UPDATE user_direct_ref_count SET is_direct_five_ref = ? WHERE user_id = ?";
+                            $stmtUpdate = $pdo->prepare($updateQuery);
+                            $stmtUpdate->execute([$newDirect5Flag, $parent_id]);
+                        }
+
+                    } else {
+                        // Handle query error
+                        // echo "Error executing query: " . mysqli_error($con);
+                        $_SESSION['errorMsg'] = "Error executing query: " . mysqli_error($con);
+                        header("Location: user_level_distribution.php");
+                        exit();
+                    }
+
+                    if($descendant_count >= 5) {
+                        $_SESSION['errorMsg'] = "only 5 directuser allowed.";
+                        header("Location: user_level_distribution.php");
+                        exit();
+                        // return;
+                    }
+
+                } else {
+                // No matching row found
+                // echo "No matching row found.";
+                // Insert failed
+                $_SESSION['errorMsg'] = "No matching row found.";
+                header("Location: user_level_distribution.php");
+                exit();
                 }
-            } else {
-                // Handle query error
-                // echo "Error executing query: " . mysqli_error($con);
-                $_SESSION['errorMsg'] = "Error executing query: " . mysqli_error($con);
-                header("Location: user_level_distribution.php");
-                exit();
-            }
-
-            if($descendant_count >= 5) {
-                $_SESSION['errorMsg'] = "only 5 directuser allowed.";
-                header("Location: user_level_distribution.php");
-                exit();
-                // return;
-            }
-
-            } else {
-            // No matching row found
-            // echo "No matching row found.";
-            // Insert failed
-            $_SESSION['errorMsg'] = "No matching row found.";
-            header("Location: user_level_distribution.php");
-            exit();
-            }
             mysqli_free_result($result);
 
             } else {
